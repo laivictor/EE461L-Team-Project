@@ -9,6 +9,15 @@ class MainPage(webapp2.RequestHandler):
             self.response.write(f.read())
         f.closed
 
+# makes a page from countries.html
+class Countries(webapp2.RequestHandler):
+    def post(self):
+        self.response.headers["Content-Type"] = "text/html"
+        f= open("countries.html","r")
+        with open('countries.html') as f:
+            self.response.write(f.read())
+        f.closed
+
 # makes a page from sports.html
 class Sports(webapp2.RequestHandler):
     def post(self):
@@ -18,7 +27,15 @@ class Sports(webapp2.RequestHandler):
             self.response.write(f.read())
         f.closed
 
+# makes a page from venues.html
+class Venues(webapp2.RequestHandler):
+    def post(self):
+        self.response.headers["Content-Type"] = "text/html"
+        f= open("venues.html","r")
+        with open('venues.html') as f:
+            self.response.write(f.read())
+        f.closed
 
-routes = [('/', MainPage), ('/sports', Greeting)]
+routes = [('/', MainPage), ('/countries', Countries), ('/sports', Sports) ('/venues', Venues)]
 
 my_app = webapp2.WSGIApplication(routes, debug=True)
