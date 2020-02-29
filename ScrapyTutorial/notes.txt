@@ -1,0 +1,5 @@
+Scrapy Tutorial
+scrapy shell "https://www.olympic.org/sports"
+response.css("div.main-holder").get()
+response.css("a").getall()
+scrapy crawl sports -o sports.json
