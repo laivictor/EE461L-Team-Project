@@ -2,16 +2,26 @@ from flask import Flask, render_template
 
 app = Flask(__name__)
 
-@app.route('/')
-def hello():
-    """Return a friendly HTTP greeting."""
-    return 'Hello World!'
-
 #to add more pages create more of these functions with /custom-url
-@app.route('/home')
+@app.route('/')
 def home():
     return render_template(
             'home.html')
+
+@app.route('/countries')
+def countries():
+    return render_template(
+            'countries.html')
+
+@app.route('/sports')
+def sports():
+    return render_template(
+            'sports.html')
+
+@app.route('/venues')
+def venues():
+    return render_template(
+            'venues.html')
             
     # return render_template(
     #         'home.html', other_param1='hello', other_param2='hey')
