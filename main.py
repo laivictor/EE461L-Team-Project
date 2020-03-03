@@ -1,5 +1,5 @@
 from flask import Flask, render_template
-
+import json
 app = Flask(__name__)
 
 #to add more pages create more of these functions with /custom-url
@@ -20,11 +20,27 @@ def sports():
 
 @app.route('/venues')
 def venues():
+
+    data = None
+    with open("venues.json") as f:
+        data = json.load(f)
+    obj = json.dumps(data, indent=4, sort_keys=True)
+
     return render_template(
-            'venues.html')
-            
-    # return render_template(
-    #         'home.html', other_param1='hello', other_param2='hey')
+            'venues.html', obj=data)
+
+@app.route('/venues/select')
+def select():
+    key= request.args.get('game')#yearseason
+    data = None
+    with open("venues.json") as f:
+        data = json.load(f)
+        
+    obj = json.dumps(data[key], indent=4, sort_keys=True)
+
+    return render_template(
+            'venues.html', obj=data)
+
 
 if __name__ == '__main__':
     # This is used when running locally only. When deploying to Google App
