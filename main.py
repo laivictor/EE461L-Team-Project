@@ -1,4 +1,6 @@
+import json
 from flask import Flask, render_template
+from json2html import *
 
 app = Flask(__name__)
 
@@ -10,8 +12,13 @@ def home():
 
 @app.route('/countries')
 def countries():
+   # linksFile = open('countries.json', 'r')
+   # country = json.load(linksFile)   
+    with open('countries.json') as json_file:
+        country = json.load(json_file)
+    afg = json2html.convert(json = country[0])
     return render_template(
-            'countries.html')
+            'countries.html', country = afg)
 
 @app.route('/sports')
 def sports():
