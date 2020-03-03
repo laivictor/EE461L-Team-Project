@@ -17,13 +17,26 @@
 
 
 <body>
-<nav class="navbar navbar-inverse navbar-fixed-top navbar-expand-lg justify-content-between">
-  	<div class="container-fluid">
-  		<div class="navbar-header">
-  			<a class="navbar-brand" href="#"> Venues</a>
-  		</div>
-	    <ul class="nav navbar-nav">
-	<li><a href="/"> Back </a></li>
+	<nav class="navbar navbar-inverse navbar-fixed-top navbar-expand-lg justify-content-between">
+		<div class="container-fluid">
+			<div class="navbar-header">
+				<a class="navbar-brand" href="#"> Venues</a>
+			</div>
+			<ul class="nav navbar-nav">
+				<li><a href="/"> Back </a></li>
+			</ul>
+			</div>
+	</nav>
+
+	<h1>Host Cities</h1>
+	{% import json%}
+	{% data = None
+		with open("venues.json") as f:
+			data = json.load(f)
+	
+	
+		print(json.dumps(data, indent=4, sort_keys=True))
+     %}
 
 </body>
 </html>
