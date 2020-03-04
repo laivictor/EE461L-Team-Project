@@ -12,18 +12,28 @@ def home():
 
 @app.route('/countries')
 def countries():
-   # linksFile = open('countries.json', 'r')
-   # country = json.load(linksFile)   
     with open('countries.json') as json_file:
-        country = json.load(json_file)
-    afg = json2html.convert(json = country[0])
+        countries = json.load(json_file)
+    
+    countries = sorted(countries, key = lambda i: i['country'])
+    for c in countries:
+        f = open('templates/countries/' + c['country'] + '.html', 'wb')
+        wr = '<!DOCTYPE html><html><head><title>Countries</title><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"><script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script><script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script><title></title></head><li><a href="countries"> Countries </a></li><body><br><br>' + json2html.convert(json = c) + '<nav class="navbar navbar-inverse navbar-fixed-top navbar-expand-lg justify-content-between"><div class="container-fluid"><div class="navbar-header"><a class="navbar-brand" href="/countries"> Countries </a></div><ul class="nav navbar-nav"><li><a href="/countries"> Back </a></li></body><body></body></html>'
+        f.write(wr.encode())
+        f.close()
+    names = [i['country'] for i in countries]
     return render_template(
-            'countries.html', country = afg)
+            'countries.html', names = names)
+
+@app.route('/countries/<string:page_name>/')
+def open_country(page_name):
+    return render_template('countries/%s.html' % page_name)
 
 @app.route('/sports')
 def sports():
     return render_template(
             'sports.html')
+
 
 @app.route('/venues')
 def venues():
