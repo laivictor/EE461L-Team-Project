@@ -1,4 +1,4 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, request
 import json
 app = Flask(__name__)
 
@@ -25,7 +25,7 @@ def venues():
     with open("venues.json") as f:
         data = json.load(f)
     obj = json.dumps(data, indent=4, sort_keys=True)
-
+    print(type(obj))
     return render_template(
             'venues.html', obj=data)
 
@@ -36,15 +36,16 @@ def select():
     with open("venues.json") as f:
         data = json.load(f)
         
-    obj = json.dumps(data[key], indent=4, sort_keys=True)
+    obj = json.dumps(data[key],indent=4, sort_keys=True)
+    obj = json.loads(obj)
 
     return render_template(
-            'venues.html', obj=data)
+            'host-template.html', obj=obj)
 
 
 if __name__ == '__main__':
     # This is used when running locally only. When deploying to Google App
     # Engine, a webserver process such as Gunicorn will serve the app. This
     # can be configured by adding an `entrypoint` to app.yaml.
-    app.run(host='127.0.0.1', port=8080, debug=True)
+    app.run(host='127.0.0.1', port=8081, debug=True)
 # [END gae_python37_app]

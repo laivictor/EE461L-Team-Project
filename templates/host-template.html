@@ -7,53 +7,43 @@
 	<meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 	<title></title>
 </head>
 
-<li><a href="venues"> Venues</a></li>
 
-
-
-<body>
+<body style="padding-top: 100px">
 	<nav class="navbar navbar-inverse navbar-fixed-top navbar-expand-lg justify-content-between">
 		<div class="container-fluid">
 			<div class="navbar-header">
 				<a class="navbar-brand" href="#"> Venues</a>
 			</div>
 			<ul class="nav navbar-nav">
-				<li><a href="/"> Back </a></li>
+				<li><a href="/venues"> Back </a></li>
 			</ul>
 		</div>
 	</nav>
 
-	<h1>Host Cities</h1>
-	
+	<div id="game-title" style="margin: auto; text-align: center;">
+		<h1 class="display-1" >{{obj['city']}} {{ obj['year']}} <small>{{obj['season']}}</small></h1>
+	</div>
 	<table class="table">
 		<tr>
-			<th>Year</th>
-			<th>Season</th>
 			<th>Host City</th>
 			<th>Host Country</th>
 			<th>Countries Participated</th>
 			<th>Athletes Participated</th>
 			<th># of Events</th>
 		</tr>
-	{% for key in obj.keys(): %}
 		
 		<tr>
-			<td>{{obj[key]['year']     }}</td>
-			<td>{{obj[key]['season']   }}</td>
-			<td><a href='/'>{{obj[key]['city']     }}</a> </td>
-			<td>{{obj[key]['country']  }}</td>
-			<td>{{obj[key]['countries']}}</td>
-			<td>{{obj[key]['athletes'] }}</td>
-			<td>{{obj[key]['events']   }}</td>
+			<td>{{obj['city']     }}</td>
+			<td>{{obj['country']  }}</td>
+			<td>{{obj['countries']}}</td>
+			<td>{{obj['athletes'] }}</td>
+			<td>{{obj['events']   }}</td>
 		</tr>
-		
-	{% endfor %}
 	</table>
-	 
 </body>
 </html>
