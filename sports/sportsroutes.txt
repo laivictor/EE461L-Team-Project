@@ -1,0 +1,252 @@
+@app.route('/sports/archery')
+def archery():
+  return render_template(
+          'sports/archery.html')
+@app.route('/sports/artistic-swimming')
+def artistic-swimming():
+  return render_template(
+          'sports/artistic-swimming.html')
+@app.route('/sports/athletics')
+def athletics():
+  return render_template(
+          'sports/athletics.html')
+@app.route('/sports/badminton')
+def badminton():
+  return render_template(
+          'sports/badminton.html')
+@app.route('/sports/baseball-softball')
+def baseball-softball():
+  return render_template(
+          'sports/baseball-softball.html')
+@app.route('/sports/basketball')
+def basketball():
+  return render_template(
+          'sports/basketball.html')
+@app.route('/sports/beach-volleyball')
+def beach-volleyball():
+  return render_template(
+          'sports/beach-volleyball.html')
+@app.route('/sports/boxing')
+def boxing():
+  return render_template(
+          'sports/boxing.html')
+@app.route('/sports/canoe-slalom')
+def canoe-slalom():
+  return render_template(
+          'sports/canoe-slalom.html')
+@app.route('/sports/canoe-sprint')
+def canoe-sprint():
+  return render_template(
+          'sports/canoe-sprint.html')
+@app.route('/sports/cycling-bmx')
+def cycling-bmx():
+  return render_template(
+          'sports/cycling-bmx.html')
+@app.route('/sports/cycling-mountain-bike')
+def cycling-mountain-bike():
+  return render_template(
+          'sports/cycling-mountain-bike.html')
+@app.route('/sports/cycling-road')
+def cycling-road():
+  return render_template(
+          'sports/cycling-road.html')
+@app.route('/sports/cycling-track')
+def cycling-track():
+  return render_template(
+          'sports/cycling-track.html')
+@app.route('/sports/diving')
+def diving():
+  return render_template(
+          'sports/diving.html')
+@app.route('/sports/equestrian-dressage')
+def equestrian-dressage():
+  return render_template(
+          'sports/equestrian-dressage.html')
+@app.route('/sports/equestrian-eventing')
+def equestrian-eventing():
+  return render_template(
+          'sports/equestrian-eventing.html')
+@app.route('/sports/equestrian-jumping')
+def equestrian-jumping():
+  return render_template(
+          'sports/equestrian-jumping.html')
+@app.route('/sports/fencing')
+def fencing():
+  return render_template(
+          'sports/fencing.html')
+@app.route('/sports/football')
+def football():
+  return render_template(
+          'sports/football.html')
+@app.route('/sports/golf')
+def golf():
+  return render_template(
+          'sports/golf.html')
+@app.route('/sports/gymnastics-artistic')
+def gymnastics-artistic():
+  return render_template(
+          'sports/gymnastics-artistic.html')
+@app.route('/sports/gymnastics-rhythmic')
+def gymnastics-rhythmic():
+  return render_template(
+          'sports/gymnastics-rhythmic.html')
+@app.route('/sports/handball')
+def handball():
+  return render_template(
+          'sports/handball.html')
+@app.route('/sports/hockey')
+def hockey():
+  return render_template(
+          'sports/hockey.html')
+@app.route('/sports/judo')
+def judo():
+  return render_template(
+          'sports/judo.html')
+@app.route('/sports/karate')
+def karate():
+  return render_template(
+          'sports/karate.html')
+@app.route('/sports/marathon-swimming')
+def marathon-swimming():
+  return render_template(
+          'sports/marathon-swimming.html')
+@app.route('/sports/modern-pentathlon')
+def modern-pentathlon():
+  return render_template(
+          'sports/modern-pentathlon.html')
+@app.route('/sports/rowing')
+def rowing():
+  return render_template(
+          'sports/rowing.html')
+@app.route('/sports/rugby')
+def rugby():
+  return render_template(
+          'sports/rugby.html')
+@app.route('/sports/sailing')
+def sailing():
+  return render_template(
+          'sports/sailing.html')
+@app.route('/sports/shooting')
+def shooting():
+  return render_template(
+          'sports/shooting.html')
+@app.route('/sports/skateboarding')
+def skateboarding():
+  return render_template(
+          'sports/skateboarding.html')
+@app.route('/sports/sport-climbing')
+def sport-climbing():
+  return render_template(
+          'sports/sport-climbing.html')
+@app.route('/sports/surfing')
+def surfing():
+  return render_template(
+          'sports/surfing.html')
+@app.route('/sports/swimming')
+def swimming():
+  return render_template(
+          'sports/swimming.html')
+@app.route('/sports/table-tennis')
+def table-tennis():
+  return render_template(
+          'sports/table-tennis.html')
+@app.route('/sports/taekwondo')
+def taekwondo():
+  return render_template(
+          'sports/taekwondo.html')
+@app.route('/sports/tennis')
+def tennis():
+  return render_template(
+          'sports/tennis.html')
+@app.route('/sports/trampoline')
+def trampoline():
+  return render_template(
+          'sports/trampoline.html')
+@app.route('/sports/triathlon')
+def triathlon():
+  return render_template(
+          'sports/triathlon.html')
+@app.route('/sports/volleyball')
+def volleyball():
+  return render_template(
+          'sports/volleyball.html')
+@app.route('/sports/water-polo')
+def water-polo():
+  return render_template(
+          'sports/water-polo.html')
+@app.route('/sports/weightlifting')
+def weightlifting():
+  return render_template(
+          'sports/weightlifting.html')
+@app.route('/sports/wrestling-freestyle')
+def wrestling-freestyle():
+  return render_template(
+          'sports/wrestling-freestyle.html')
+@app.route('/sports/wrestling-greco-roman')
+def wrestling-greco-roman():
+  return render_template(
+          'sports/wrestling-greco-roman.html')
+@app.route('/sports/alpine-skiing')
+def alpine-skiing():
+  return render_template(
+          'sports/alpine-skiing.html')
+@app.route('/sports/biathlon')
+def biathlon():
+  return render_template(
+          'sports/biathlon.html')
+@app.route('/sports/bobsleigh')
+def bobsleigh():
+  return render_template(
+          'sports/bobsleigh.html')
+@app.route('/sports/cross-country-skiing')
+def cross-country-skiing():
+  return render_template(
+          'sports/cross-country-skiing.html')
+@app.route('/sports/curling')
+def curling():
+  return render_template(
+          'sports/curling.html')
+@app.route('/sports/figure-skating')
+def figure-skating():
+  return render_template(
+          'sports/figure-skating.html')
+@app.route('/sports/freestyle-skiing')
+def freestyle-skiing():
+  return render_template(
+          'sports/freestyle-skiing.html')
+@app.route('/sports/ice-hockey')
+def ice-hockey():
+  return render_template(
+          'sports/ice-hockey.html')
+@app.route('/sports/luge')
+def luge():
+  return render_template(
+          'sports/luge.html')
+@app.route('/sports/nordic-combined')
+def nordic-combined():
+  return render_template(
+          'sports/nordic-combined.html')
+@app.route('/sports/short-track')
+def short-track():
+  return render_template(
+          'sports/short-track.html')
+@app.route('/sports/skeleton')
+def skeleton():
+  return render_template(
+          'sports/skeleton.html')
+@app.route('/sports/ski-jumping')
+def ski-jumping():
+  return render_template(
+          'sports/ski-jumping.html')
+@app.route('/sports/snowboard')
+def snowboard():
+  return render_template(
+          'sports/snowboard.html')
+@app.route('/sports/speed-skating')
+def speed-skating():
+  return render_template(
+          'sports/speed-skating.html')
+@app.route('/sports/basque-pelota')
+def basque-pelota():
+  return render_template(
+          'sports/basque-pelota.html')
