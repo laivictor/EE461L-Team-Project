@@ -12,6 +12,7 @@ def get_response(url, filename):
     #url = 'http://olympic.org/olympic-games'
     response = requests.get(url)
     # print(response.content)
+
     with open(filename, 'wb') as f:
         f.write(response.content)
 
@@ -57,7 +58,46 @@ def scrape_hosts_info(link):
         soup = BeautifulSoup(f.read(), 'html.parser')
         
     values = soup.findAll('div', class_='text-box')
+
+    image = soup.findAll('picture', class_='image')
+    #print(image)
+    img_link = ""
+    count = 0
+    count2 = 0
+    count3 = 0
     
+    
+    
+    for tag in image:
+        
+        imgs = tag.find('img', src=True)
+        img2 = tag.find('img', srcset=True)
+        img3 = tag.find('img', class_="lazyload")
+
+        if(not(type(imgs) == type(None))):
+            if("still" in (imgs['src'])):
+                count += 1
+                if count == 2:
+                    img_link = (imgs['src'])
+                    print(0)
+                    break
+        if(not(type(img2) == type(None))):
+            if("still" in (img2['srcset'])):
+                count2 += 1
+                if count2 == 2:
+                    img_link = (img2['srcset'])
+                    print(1)
+                    break
+
+        if(not(type(img3) == type(None))):
+            if("still" in (img3['data-src'])):
+                count3 += 1
+                if count3 == 2:
+                    img_link = (img3['data-src'])
+                    print(2)
+                    break
+
+    #print(img_link)
     count = 0
     athens_stats = []
     for a in values:
@@ -78,9 +118,28 @@ def scrape_hosts_info(link):
     fixed.append(" ".join(athens_stats[2][1:len(athens_stats[2])]))
     athens_stats[2] = fixed
     athens_stats.append(season)
+    athens_stats.append(img_link)
     return athens_stats
 
+def medal_table(season, year):
+    
+    if(int(year) > 2018):
+        return None
+    print(year)
+    url = "https://www.topendsports.com/events/" + season.lower() + "/medal-tally/" + year + ".htm"
+    filename = "responses/medal_tables/"+year+"-"+season +".html"
 
+    if(not path.exists(filename)):
+        get_response(url, filename)
+    
+    with open(filename, 'rb') as f:
+        soup = BeautifulSoup(f.read(), 'html.parser')
+
+    medals = soup.find('table', class_='list')
+    print(medals)
+    print(type(str(medals)))
+    medals = str(medals).replace("list", "table")
+    return medals
 
 def make_dictionary(array_from_scrape):
     city =  " ".join(array_from_scrape[0][0:len(array_from_scrape[0])-1])
@@ -91,14 +150,12 @@ def make_dictionary(array_from_scrape):
     countries = array_from_scrape[4][1]
     events = array_from_scrape[5][1]
     season = array_from_scrape[6]
-
-
-
-
-
+    logo = array_from_scrape[7]
+    mdl = medal_table(season, year)
+    
 
     obj = {"city":city, "year":year, "date":date, "season":season, "country":country, "athletes":athletes,
-             "countries":countries, "events":events}
+             "countries":countries, "events":events, "logo":logo, "medal_table":mdl}
     return obj
 
 
@@ -113,21 +170,6 @@ if __name__ == "__main__":
     with open('venues.json', 'w') as fp:
         json.dump(data, fp)
     
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

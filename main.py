@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, Markup
 import json
 app = Flask(__name__)
 
@@ -40,7 +40,7 @@ def select():
     obj = json.loads(obj)
 
     return render_template(
-            'host-template.html', obj=obj)
+            'host-template.html', obj=obj, medals=Markup(obj["medal_table"]))
 
 
 if __name__ == '__main__':

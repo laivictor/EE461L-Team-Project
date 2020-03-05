@@ -28,6 +28,11 @@
 	<div id="game-title" style="margin: auto; text-align: center;">
 		<h1 class="display-1" >{{obj['city']}} {{ obj['year']}} <small>{{obj['season']}}</small></h1>
 	</div>
+
+	<div style="margin: 0 auto; text-align: center">
+		<img src="{{obj['logo']}}"/>
+	</div>
+
 	<table class="table">
 		<tr>
 			<th>Host City</th>
@@ -45,5 +50,8 @@
 			<td>{{obj['events']   }}</td>
 		</tr>
 	</table>
+	<emsp></emsp><h4># of Medals won by Country</h4>
+	{{medals | safe}}
+
 </body>
 </html>
