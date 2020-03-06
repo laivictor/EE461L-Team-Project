@@ -10,8 +10,57 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
   </head>
 
-	<link type="text/css" rel="stylesheet" href="/stylesheets/main.css" />
+	<!-- <link type="text/css" rel="stylesheet" href="/static/index.css" /> -->
   <body>
+    <br>
+  <br>
+  <br>
+  <br>
+  <img src=https://upload.wikimedia.org/wikipedia/commons/thumb/5/5c/Olympic_rings_without_rims.svg/1200px-Olympic_rings_without_rims.svg.png alt="olympic logo">
+  <h1>About Us</h1>
+  <br>
+  <br>
+  <h2>Our Purpose</h2>
+  <p>We're showing people the Olympics Stats.</p>
+  
+  <div> {{stats | safe}} </div>
+  
+  <!-- About page
+    ~ one page
+    ~ description of the site, its purpose, its intended users
+    ~ explains the interesting result produced by integrating disparate data sources
+    ~ the group name
+    ~ the group members
+    ~ for each member: name, photo, bio, major/track, primary responsibilities, number of commits, number of issues, number of unit tests
+    ~ team stats: total number of commits, total number of issues, total number of unit tests
+    ~ data: links to data sources, description of how each was scraped
+    ~ tools: tools used, description of how they were used
+    ~ link to Github repo -->
+
+
+  <div class="bio-container">
+      <h2>Manuel Avalos</h2>
+      <div class="thumbnail">
+        <img src="manny-profile.jpg" alt="missing image"/>
+      </div>
+      <p class="bio-item"><h4>Major </h4> Electrical and Computer Engineering</p>
+      <p class="bio-item"><h4>Track </h4>Software Engineering and Design</p>
+      <p class="bio-item"><h4>Bio </h4> The FitnessGram Pacer (Progressive Aerobic Cardiovascular Endurance Run) Test is a real cardio activity developed in 1982. A common copypasta explains the rules of the exercise: The FitnessGram Pacer Test is a multistage aerobic capacity test that progressively gets more difficult as it continues. The 20 meter pacer test will begin in 30 seconds.</p>
+      <p class="bio-item"><h4>Responsibilites </h4> Host Cities</p>
+  </div>
+
+  <div class="bio-container">
+    <h2>David Lok</h2>
+    <img class="" src="manny-profile.jpg"/>
+    <p><h4>Major </h4> Electrical and Computer Engineering</p>
+    <p><h4>Track </h4>Software Engineering and Design</p>
+    <p><h4>Bio </h4> The FitnessGram Pacer (Progressive Aerobic Cardiovascular Endurance Run) Test is a real cardio activity developed in 1982. A common copypasta explains the rules of the exercise: The FitnessGram Pacer Test is a multistage aerobic capacity test that progressively gets more difficult as it continues. The 20 meter pacer test will begin in 30 seconds.</p>
+    <p><h4>Responsibilites </h4> Host Cities</p>
+    <!-- <p><h4>Commits</h4> {{stats['jdl3687']['commits']}}</p> -->
+</div>
+
+
+  
   <nav class="navbar navbar-inverse navbar-fixed-top navbar-expand-lg justify-content-between">
   	<div class="container-fluid">
   		<div class="navbar-header">
@@ -20,6 +69,9 @@
 	    <ul class="nav navbar-nav">
 	    	<li><a href="countries"> Countries </a></li>
 		<li><a href="venues"> Venues </a></li>
-		<li><a href="sports"> Sports </a></li>
+    <li><a href="sports"> Sports </a></li>
+      </ul>
+    </div>
+  </nav>
     </body>
 </html>
