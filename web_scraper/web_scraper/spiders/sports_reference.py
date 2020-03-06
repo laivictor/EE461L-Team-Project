@@ -26,8 +26,8 @@ class SportsReferenceSpider(CrawlSpider):
         item = {}
 
         item['country'] = response.xpath('//*[@class="float_left margin_right margin_bottom"]//text()').get()
-
-
+        item['img'] = response.xpath('//p//img//@src').get()
+        
         children = []
         for row in response.xpath('//*[@class="sortable  stats_table"]//tbody/tr'):
 
