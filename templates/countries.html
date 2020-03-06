@@ -7,13 +7,15 @@
 		background-color: #FFF;
 		border: 1px solid black;
 		color: black;
-		padding: 15px 32px;
-		text-align: center;
+		padding: 5px 10px;
 		text-decoration: none;
 		display: inline-block;
-		font-size: 16px;
+		font-size: 15px;
+		font-weight: 500;
 		border-radius:10px;
-		margin-bottom: 20px;
+		margin-bottom: 10px;
+		margin-right: 10px;
+		margin-left: 10px;
 	}
 	.countrycontainer{
 		text-align: center;
@@ -35,9 +37,11 @@
 
 <br>
 <br>
-{% for n in names %}
-<div class="countrycontainer">
-	<a class="countrybutton" href="/countries/{{n}}"> {{n}}</a>
+{% for i in range(0, num) %}
+<div style = "text-align: center;">
+	<img src = {{imgs[i]}} width=35 height=20>
+	<a class="countrybutton" href="/countries/{{names[i]}}"> {{names[i]}}</a>
+	<img src = {{imgs[i]}} width=35 height=20>
 </div>
 {% endfor %}
 <nav class="navbar navbar-inverse navbar-fixed-top navbar-expand-lg justify-content-between">

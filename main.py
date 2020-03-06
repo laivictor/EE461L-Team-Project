@@ -18,14 +18,17 @@ def countries():
         countries = json.load(json_file)
     countries = sorted(countries, key = lambda i: i['country'])
     names = [i['country'] for i in countries]
+    imgs = [i['img'] for i in countries]
+    num = len(names)
     return render_template(
-            'countries.html', names = names)
+            'countries.html', names = names, imgs = imgs, num = num)
 
 @app.route('/countries/<string:page_name>/')
 def open_country(page_name):
     with open('countries.json') as json_file:
         countries = json.load(json_file)
-    tb = [i for i in countries if i['country']==page_name]
+    tb = [i for i in countries if i['country']==page_name][0]
+    del tb['img']
     table = json2html.convert(json = tb) #,table_attributes="class=\"datatable\""
     return render_template('countries_template.html', table = table)
 
