@@ -1,6 +1,8 @@
 import json
 
 from flask import Flask, render_template
+import json
+from json2html import *
 
 from json2html import *
 
@@ -9,8 +11,12 @@ app = Flask(__name__)
 #to add more pages create more of these functions with /custom-url
 @app.route('/')
 def home():
+
+    with open('about.json', 'r') as about_file:
+        stats = json.load(about_file)
+        s = json2html.convert(json = stats)
     return render_template(
-            'home.html')
+            'home.html', stats = s)
 
 @app.route('/countries')
 def countries():
