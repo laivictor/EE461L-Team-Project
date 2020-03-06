@@ -40,9 +40,11 @@ for e in events:
 data['total_commits'] = total_commits
 data['total_issues'] = total_issues
 
-j = json.dumps(data, indent = 2)
 
+for key in data:
+	print(key)
 
+with open('about.json', 'w') as f:
+	json.dump(data, f,  indent = 2)
 
-print(j)
 
