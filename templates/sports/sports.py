@@ -1,4 +1,3 @@
-
 flag = False;
 s = [];
 f = open("sports.json", "r")
@@ -20,7 +19,7 @@ for x in s:
   #writing individual sports files
   f = open(x + ".html","w+")
   name = x.replace('-',' ').capitalize()
-  ref = x.replace('-','_')
+  pyname = x.replace('-','_')
   st_list = []
   st_list.append('<!DOCTYPE html>')
   st_list.append('<html>')
@@ -33,7 +32,7 @@ for x in s:
   st_list.append('  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>')
   st_list.append('	<title></title>')
   st_list.append('</head>')
-  st_list.append('<li><a href="sports/'+ ref +'"> '+ name +'</a></li>')
+  st_list.append('<li><a href="sports/'+ x +'"> '+ name +'</a></li>')
   st_list.append('<body>')
   st_list.append('<nav class="navbar navbar-inverse navbar-fixed-top navbar-expand-lg justify-content-between">')
   st_list.append('	<div class="container-fluid">')
@@ -50,14 +49,14 @@ for x in s:
   # writing routing info to add to main.py
   f = open('sportsroutes.txt', 'a+')
   st_list = []
-  st_list.append("@app.route('/sports/"+ ref +"')")
-  st_list.append("def " + ref + "():")
+  st_list.append("@app.route('/sports/"+ x +"')")
+  st_list.append("def " + pyname + "():")
   st_list.append("  return render_template(")
-  st_list.append("          'sports/" + ref + ".html')\n\n")
+  st_list.append("          'sports/" + x + ".html')\n\n")
   st = '\n'.join(st_list)
   f.write(st)
   # writing html to add links to sports.html
   f = open('sportshtml.txt', 'a+')
-  st = '<a href="sports/' + ref + '">' + name + '</a><br>\n'
+  st = '<a href="sports/' + x + '">' + name + '</a><br>\n'
   f.write(st)
   f.close()
