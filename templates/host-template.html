@@ -1,0 +1,57 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+
+	<title>Host Cities</title>
+	<meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+	<title></title>
+</head>
+
+
+<body style="padding-top: 100px; width:70%; margin: 0 auto">
+	<nav class="navbar navbar-inverse navbar-fixed-top navbar-expand-lg justify-content-between">
+		<div class="container-fluid">
+			<div class="navbar-header">
+				<a class="navbar-brand" href="/host-cities"> Host Cities</a>
+			</div>
+			<ul class="nav navbar-nav">
+				<li><a href="/host-cities"> Back </a></li>
+			</ul>
+		</div>
+	</nav>
+
+	<div id="game-title" style="margin: auto; text-align: center;">
+		<h1 class="display-1" >{{obj['city']}} {{ obj['year']}} <small>{{obj['season']}}</small></h1>
+	</div>
+
+	<div style="margin: 0 auto; text-align: center">
+		<img src="{{obj['logo']}}"/>
+	</div>
+
+	<table class="table">
+		<tr>
+			<th>Host City</th>
+			<th>Host Country</th>
+			<th>Countries Participated</th>
+			<th>Athletes Participated</th>
+			<th># of Events</th>
+		</tr>
+		
+		<tr>
+			<td>{{obj['city']     }}</td>
+			<td>{{obj['country']  }}</td>
+			<td>{{obj['countries']}}</td>
+			<td>{{obj['athletes'] }}</td>
+			<td>{{obj['events']   }}</td>
+		</tr>
+	</table>
+	<emsp></emsp><h4># of Medals won by Country</h4>
+	{{medals | safe}}
+
+</body>
+</html>

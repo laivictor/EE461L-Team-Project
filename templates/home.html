@@ -2,7 +2,7 @@
 
   <head>
 
-    <
+    
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
@@ -10,17 +10,236 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
   </head>
 
-	<link type="text/css" rel="stylesheet" href="/stylesheets/main.css" />
-  <body>
+  <!-- <link type="text/css" rel="stylesheet" href="/static/index.css" /> -->
+  <style>
+    .w-50{
+      margin: 0 auto;
+    }
+    #olympic-logo {
+      display: block;
+      width: 50%;
+      margin: 0 auto;
+    }
+    #profile-photo {
+      display: block;
+      margin: 30px auto;
+      width: 100%;
+    }
+    #github-logo {
+      width: 2%;
+    }
+    .bio-container p{
+      margin-left: 5px;
+    }
+    .bio-container{
+      border: 1px solid gray;
+      border-radius: 3px;
+      margin-bottom: 10px;
+      padding: 50px;
+    }
+    h4{font-weight: bold;}
 
+
+  </style>
+  <body style="width:70%; margin: 0 auto">
+    <br>
   <br>
   <br>
   <br>
+  <img id="olympic-logo" src=https://upload.wikimedia.org/wikipedia/commons/thumb/5/5c/Olympic_rings_without_rims.svg/1200px-Olympic_rings_without_rims.svg.png alt="olympic logo">
+  <h1><b>About Us</b></h1>
   <br>
+  <p>We are Team Afternoon-4 and our project is about bringing easy-to-read Olympics statistics to you, the user!
+    This site is split into three main groups, Countries, Host Cities, and Sports. <br />
+    Countries contains a description of each participating country. <br />
+    Host Cities brings you to a list of all of the Olympic games by year and general stats of each game. <br />
+    Sports describes all of the olympic events that have been held since the inception of the Games.
+  </p>
+  <br>
+  <h2>Our Purpose</h2>
+  <p>Bringing Olympic info to help users feel more connected to their hometown.</p>
+  <h2>Our Audience</h2>
+  <p>Anyone who wants to learn more about the Games are welcome here!</p>
+  
+  <!-- About page
+    ~ one page
+    ~ description of the site, its purpose, its intended users
+    ~ explains the interesting result produced by integrating disparate data sources
+    ~ the group name
+    ~ the group members
+    ~ for each member: name, photo, bio, major/track, primary responsibilities, number of commits, number of issues, number of unit tests
+    ~ team stats: total number of commits, total number of issues, total number of unit tests
+    ~ data: links to data sources, description of how each was scraped
+    ~ tools: tools used, description of how they were used
+    ~ link to Github repo -->
+  <h1>Meet Our Team</h1>
 
-  <div> {{stats | safe}} </div>
+  <div class="bio-container">
+    <h2 style="margin-left: 10px;">Chris Acosta</h2>
+    <div class="container-fluid">
+      <div class="row">    
+        <div class="col-lg-4">
+          <img id="profile-photo" src="https://avatars3.githubusercontent.com/u/32726047?v=4" alt="missing image"/>
+        </div>
+        <div class="col-lg-8">
+          <h4>Major </h4>
+          <p>Electrical and Computer Engineering</p>
+          <p><h4>Track </h4>Software Engineering and Design</p>
+          <p><h4>Bio </h4> BIO HERE </p>
+          <p><h4>Responsibilites </h4> Countries </p>
+          <p><h4>Commits</h4> {{obj['chris-acosta']['commits']}}</p>
+          <p><h4>Issues</h4> {{obj['chris-acosta']['issues']}}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="bio-container">
+    <h2 style="margin-left: 10px;">Eduardo Ruiz</h2>
+    <div class="container-fluid">
+      <div class="row">    
+        <div class="col-lg-4">
+          <img id="profile-photo" src="https://avatars0.githubusercontent.com/u/35593775?v=4" alt="missing image"/>
+        </div>
+        <div class="col-lg-8">
+          <h4>Major </h4>
+          <p>Electrical and Computer Engineering</p>
+          <p><h4>Track </h4>Software Engineering and Design</p>
+          <p><h4>Bio </h4> I'm cool </p>
+          <p><h4>Responsibilites </h4> Sports</p>
+          <p><h4>Commits</h4> {{obj['EsaZul']['commits']}}</p>
+          <p><h4>Issues</h4> {{obj['EsaZul']['issues']}}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div class="bio-container">
+    <h2 style="margin-left: 10px;">Manuel Avalos</h2>
+    <div class="container-fluid">
+      <div class="row">    
+        <div class="col-lg-4">
+          <img id="profile-photo" src="https://avatars1.githubusercontent.com/u/32210133?v=4" alt="missing image"/>
+        </div>
+        <div class="col-lg-8">
+          <h4>Major </h4>
+          <p>Electrical and Computer Engineering</p>
+          <p><h4>Track </h4>Software Engineering and Design</p>
+          <p><h4>Bio </h4>Hello I am a 3rd Year student from Dallas, TX. I enjoy watching films, playing games, and software development.</p>
+          <p><h4>Responsibilites </h4> Host Cities</p>
+          <p><h4>Commits</h4> {{obj['manuelavalos7']['commits']}}</p>
+          <p><h4>Issues</h4> {{obj['manuelavalos7']['issues']}}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="bio-container">
+    <h2 style="margin-left: 10px;">David Lok</h2>
+    <div class="container-fluid">
+      <div class="row">    
+        <div class="col-lg-4">
+          <img id="profile-photo" src="https://avatars2.githubusercontent.com/u/25232517?v=4" alt="missing image"/>
+        </div>
+        <div class="col-lg-8">
+          <h4>Major </h4>
+          <p>Electrical and Computer Engineering</p>
+          <p><h4>Track </h4>Software Engineering and Design</p>
+          <p><h4>Bio </h4> Hi! I'm a 4th year UT ECE major. I was raised in Houston, TX. My hobbies include a cappella...</p>
+          <p><h4>Responsibilites </h4> Host Cities</p>
+          <p><h4>Commits</h4> {{obj['jdl3687']['commits']}}</p>
+          <p><h4>Issues</h4> {{obj['jdl3687']['issues']}}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="bio-container">
+  <h2 style="margin-left: 10px;">Victor Lai</h2>
+  <div class="container-fluid">
+    <div class="row">    
+      <div class="col-lg-4">
+        <img id="profile-photo" src="https://avatars2.githubusercontent.com/u/47512378?v=4" alt="missing image"/>
+      </div>
+      <div class="col-lg-8">
+        <h4>Major </h4>
+        <p>Electrical and Computer Engineering</p>
+        <p><h4>Track </h4>Software Engineering and Design</p>
+        <p><h4>Bio </h4> BIO HERE </p>
+        <p><h4>Responsibilites </h4> Sports </p>
+        <p><h4>Commits</h4> {{obj['laivictor']['commits']}}</p>
+        <p><h4>Issues</h4> {{obj['laivictor']['issues']}}</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="bio-container">
+  <h2 style="margin-left: 10px;">Nimay Kumar</h2>
+  <div class="container-fluid">
+    <div class="row">    
+      <div class="col-lg-4">
+        <img id="profile-photo" src="https://avatars0.githubusercontent.com/u/33074769?v=4" alt="missing image"/>
+      </div>
+      <div class="col-lg-8">
+        <h4>Major </h4>
+        <p>Electrical and Computer Engineering</p>
+        <p><h4>Track </h4>Software Engineering and Design</p>
+        <p><h4>Bio </h4> BIO HERE </p>
+        <p><h4>Responsibilites </h4> Countries</p>
+        <p><h4>Commits</h4> {{obj['NimayRKumar']['commits']}}</p>
+        <p><h4>Issues</h4> {{obj['NimayRKumar']['issues']}}</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="team-stats">
+  <p><h4>Total Commits</h4>{{obj['total_commits']}}</p>
+  <p><h4>Total Issues</h4>{{obj['total_issues']}}</p>
+</div>
+
+<div id="tools">
+  <h3>Tools</h3>
+  <h4>Visual Studio Code</h4>
+  <p>Our main editor. We compiled, debugged, and edited our code. 
+    This also allowed us to easily see our files’ hierarchy, where they’re located, 
+    and has the accessibility to use the command line and instantly load the website into our local machine.</p>
+  <h4>Google Cloud Platform</h4>
+  <p> This website is hosted on Google Cloud Platform. We are using the <a href="https://cloud.google.com/appengine/docs/standard/python3/">Python 3 standard environment</a> and <a href="https://palletsprojects.com/p/flask/" >Flask</a> to serve requests</p>
+  
+  
+  <h4>Scrapy</h4>
+  <p> Our implementation to interact with our RESTful API. 
+    Scrapes the data off the website to make it our own. 
+    This allows us to create json files which we can then parse, filter, sort, and use.
+    We also used python's <a href="https://2.python-requests.org/en/master/">requests</a> library and <a href="https://www.crummy.com/software/BeautifulSoup/">beautifulsoup4</a> 
+    to scrape websites that did not have a REST API already. Requests obtains request data from the servers and bs4 is used to parse the data.
+  </p>
+    sources: 
+    <ul style="list-style: none">
+      <li><a href="https://olympic.org">olympic.org</a></li>
+      <li><a href="https://www.topendsports.com/events/">topendsports.com</a></li>
+      
+    </ul>
+</div>
 
 
+
+
+
+<div id="repo">
+  <p>Link to our repository below</p>
+  <a href="https://github.com/laivictor/EE461L-Team-Project">
+    <img id="github-logo" src="https://image.flaticon.com/icons/svg/25/25231.svg" alt="github link">
+  </a>
+</div>
+
+  <h4>Statistics</h4>
+  <div> {{stats | safe}} </div> 
+
+  
   <nav class="navbar navbar-inverse navbar-fixed-top navbar-expand-lg justify-content-between">
   	<div class="container-fluid">
   		<div class="navbar-header">
@@ -28,7 +247,13 @@
   		</div>
 	    <ul class="nav navbar-nav">
 	    	<li><a href="countries"> Countries </a></li>
-		<li><a href="venues"> Venues </a></li>
-		<li><a href="sports"> Sports </a></li>
+		<li><a href="host-cities"> Host Cities </a></li>
+    <li><a href="sports"> Sports </a></li>
+      </ul>
+    </div>
+  </nav>
     </body>
+   
+  
+
 </html>
