@@ -1,0 +1,69 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+
+	<title>Host Cities</title>
+	<meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+	<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet"/>
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.12/css/dataTables.bootstrap.min.css" rel="stylesheet"/>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.12/js/jquery.dataTables.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.12/js/dataTables.bootstrap.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+	<script>
+		$(document).ready(function() {
+			$('#table').DataTable();
+		  });
+		</script>
+	<title></title>
+</head>
+
+
+<body style="padding-top:100px; width:70%; margin: 0 auto">
+	<nav class="navbar navbar-inverse navbar-fixed-top navbar-expand-lg justify-content-between">
+		<div class="container-fluid">
+			<div class="navbar-header">
+				<a class="navbar-brand" href="#"> Host Cities</a>
+			</div>
+			<ul class="nav navbar-nav">
+				<li><a href="/"> Back </a></li>
+			</ul>
+		</div>
+	</nav>
+
+	<h1>Host Cities</h1>
+
+
+	<table class="table">
+		<thead>
+			<tr>
+				<th>Year</th>
+				<th>Season</th>
+				<th>Host City</th>
+				<th>Host Country</th>
+				<th>Countries Participated</th>
+				<th>Athletes Participated</th>
+				<th># of Events</th>
+			</tr>
+		</thead>
+	{% for key in obj.keys(): %}
+		<tbody>
+			<tr>
+				<td>{{obj[key]['year']     }}</td>
+				<td>{{obj[key]['season']   }}</td>
+				<td><a href= "{{'/host-cities/select?game=' + key}}">{{obj[key]['city']     }}</a> </td>
+				<td>{{obj[key]['country']  }}</td>
+				<td>{{obj[key]['countries']}}</td>
+				<td>{{obj[key]['athletes'] }}</td>
+				<td>{{obj[key]['events']   }}</td>
+			</tr>
+		</tbody>
+	{% endfor %}
+	</table>
+	
+</body>
+</html>

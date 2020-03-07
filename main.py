@@ -1,6 +1,6 @@
 import json
 
-from flask import Flask, render_template
+from flask import Flask, render_template, request, Markup
 import json
 from json2html import *
 
@@ -13,10 +13,10 @@ app = Flask(__name__)
 def home():
 
     with open('about.json', 'r') as about_file:
-        stats = json.load(about_file)
-        s = json2html.convert(json = stats)
+        stats_o = json.load(about_file)
+        stats = json2html.convert(json = stats_o)
     return render_template(
-            'home.html', stats = s)
+            'home.html', stats = stats, obj = stats_o)
 
 @app.route('/countries')
 def countries():
@@ -44,13 +44,30 @@ def sports():
             'sports.html')
 
 
-@app.route('/venues')
+@app.route('/host-cities')
 def venues():
+
+    data = None
+    with open("host-cities/venues.json") as f:
+        data = json.load(f)
+    obj = json.dumps(data, indent=4, sort_keys=True)
+    print(type(obj))
     return render_template(
-            'venues.html')
-            
-    # return render_template(
-    #         'home.html', other_param1='hello', other_param2='hey')
+            'host-cities.html', obj=data)
+
+@app.route('/host-cities/select')
+def select():
+    key= request.args.get('game')#yearseason
+    data = None
+    with open("host-cities/venues.json") as f:
+        data = json.load(f)
+        
+    obj = json.dumps(data[key],indent=4, sort_keys=True)
+    obj = json.loads(obj)
+
+    return render_template(
+            'host-template.html', obj=obj, medals=Markup(obj["medal_table"]))
+
 
 @app.route('/sports/archery')
 def archery():
