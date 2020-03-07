@@ -2,25 +2,15 @@
 <html>
 <head>
 
-<style>
-	.countrybutton{
-		background-color: #FFF;
-		border: 1px solid black;
-		color: black;
-		padding: 5px 10px;
-		text-decoration: none;
-		display: inline-block;
-		font-size: 15px;
-		font-weight: 500;
-		border-radius:10px;
-		margin-bottom: 10px;
-		margin-right: 10px;
-		margin-left: 10px;
-	}
-	.countrycontainer{
-		text-align: center;
-	}
-</style>
+	<style>
+		.datatable{
+			text-align: center;
+			margin-left:auto; 
+    		margin-right:auto;
+			border-collapse: collapse;
+			border: 1px solid black;
+		}
+	</style>
 
 	<title>Countries</title>
 	<meta charset="utf-8">
@@ -37,20 +27,16 @@
 
 <br>
 <br>
-{% for i in range(0, num) %}
-<div style = "text-align: center;">
-	<img src = {{imgs[i]}} width=35 height=20>
-	<a class="countrybutton" href="/countries/{{names[i]}}"> {{names[i]}}</a>
-	<img src = {{imgs[i]}} width=35 height=20>
-</div>
-{% endfor %}
+
+{{table | safe}}
+
 <nav class="navbar navbar-inverse navbar-fixed-top navbar-expand-lg justify-content-between">
   	<div class="container-fluid">
   		<div class="navbar-header">
-  			<a class="navbar-brand" href="#"> Countries </a>
+  			<a class="navbar-brand" href="/countries"> Countries </a>
   		</div>
 	    <ul class="nav navbar-nav">
-	<li><a href="/"> Back </a></li>
+	<li><a href="/countries"> Back </a></li>
 </body>
 
 <body>
