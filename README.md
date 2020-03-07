@@ -7,7 +7,7 @@
 - Eduardo Saul Ruiz, esr668, EsaZul <br/>
 - Christopher Acosta, ca32754, chris-acosta <br/>
 
-**Link to website**: https://olympics-269900.appspot.com/sports <br/>
+**Link to website**: https://olympics-269900.appspot.com <br/>
 
 **Estimated Completion Time**: <br/>
 - Victor Lai: 10 hrs<br/>
