@@ -9,10 +9,10 @@ app = Flask(__name__)
 def home():
 
     with open('about.json', 'r') as about_file:
-        stats = json.load(about_file)
-        s = json2html.convert(json = stats)
+        stats_o = json.load(about_file)
+        stats = json2html.convert(json = stats_o)
     return render_template(
-            'home.html', stats = s)
+            'home.html', stats = stats, obj = stats_o)
 
 @app.route('/countries')
 def countries():
@@ -36,23 +36,24 @@ def open_country(page_name):
 
 @app.route('/sports')
 def sports():
-    with open('sports/sport.json') as json_file:
-        sport = json.load(json_file)
+    with open('templates/sports/sport.json') as sportfile:
+        sport = json.load(sportfile)
     names = [i['name'] for i in sport]
-    imgs = [i['img'] for i in sport]
+    refs = [i['ref'] for i in sport]
+    imgs = ['../static/' + i['img'] for i in sport]
     num = len(names)
     return render_template(
-            'countries.html', names = names, imgs = imgs, num = num)
+            'sports.html', names = names, refs = refs, imgs = imgs, num = num)
 
 @app.route('/sports/<string:page_name>/')
 def open_sport(page_name):
-    with open('sports/sport.json') as json_file:
-        countries = json.load(json_file)
-    tb = [i for i in countries if i['country']==page_name][0]
-    del tb['img']
-    table = json2html.convert(json = tb)
+    with open('templates/sports/sport.json') as sportfile:
+        sport = json.load(sportfile)
+    tb = [i for i in sport if i['name']==page_name][0]
+    name = tb['name']
+    img = '../../static/' + tb['img']
     return render_template(
-            'countries_template.html', name = name, img = img)
+            'sports/sports_template.html', name = name, img = img)
 
 
 @app.route('/venues')

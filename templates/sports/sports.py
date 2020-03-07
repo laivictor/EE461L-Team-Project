@@ -19,7 +19,8 @@ for x in s:
   name = x.replace('-',' ').capitalize()
   f = open('sport.json', 'a+')
   st_list = []
-  st_list.append('{"name":"' + x)
+  st_list.append('{"name":"' + name)
+  st_list.append('","ref":"' + x)
   st_list.append('","img":"imgs/' + x + '.png"')
   st_list.append('},')
   st = ''.join(st_list)
@@ -31,6 +32,7 @@ for x in s:
   f.write(st)
   f.close()
 f = open('sport.json', 'a+')
+#need to remove comma after running this
 st = ']'
 f.write(st)
 f.close()
