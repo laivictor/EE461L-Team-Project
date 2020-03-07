@@ -10,17 +10,17 @@
 **Link to website**:  <br/>
 
 **Estimated Completion Time**: <br/>
-- Victor Lai: <br/>
-- Manuel Avalos: <br/> 
-- David Lok: <br/>
-- Nimay Kumar: <br/>
-- Eduardo Saul Ruiz: <br/>
-- Christopher Acosta: <br/>
+- Victor Lai: 10 hrs<br/>
+- Manuel Avalos: 12 hrs<br/> 
+- David Lok: 12 hrs<br/>
+- Nimay Kumar: 10 hrs<br/>
+- Eduardo Saul Ruiz: 10 hrs<br/>
+- Christopher Acosta: 10 hrs <br/>
 
 **Actual Completion Time**: <br/>
-- Victor Lai: <br/>
-- Manuel Avalos: <br/> 
-- David Lok: <br/>
-- Nimay Kumar: <br/>
-- Eduardo Saul Ruiz: <br/>
-- Christopher Acosta: <br/>
+- Victor Lai: 9 hrs<br/>
+- Manuel Avalos: 11 hrs <br/> 
+- David Lok: 11 hrs<br/>
+- Nimay Kumar: 10 hrs<br/>
+- Eduardo Saul Ruiz: 10 hrs<br/>
+- Christopher Acosta: 10 hrs <br/>
