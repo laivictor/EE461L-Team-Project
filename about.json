@@ -1,27 +1,27 @@
 {
   "jdl3687": {
-    "commits": 4,
+    "commits": 6,
     "issues": 0,
-    "name": null,
+    "name": "David Lok",
     "bio": null,
     "photo": "https://avatars2.githubusercontent.com/u/25232517?v=4"
   },
   "manuelavalos7": {
-    "commits": 5,
+    "commits": 7,
     "issues": 0,
     "name": null,
     "bio": null,
     "photo": "https://avatars1.githubusercontent.com/u/32210133?v=4"
   },
   "chris-acosta": {
-    "commits": 2,
+    "commits": 17,
     "issues": 0,
     "name": null,
     "bio": null,
     "photo": "https://avatars3.githubusercontent.com/u/32726047?v=4"
   },
   "NimayRKumar": {
-    "commits": 5,
+    "commits": 9,
     "issues": 2,
     "name": "Nimay Kumar",
     "bio": null,
@@ -35,12 +35,12 @@
     "photo": "https://avatars0.githubusercontent.com/u/35593775?v=4"
   },
   "laivictor": {
-    "commits": 9,
+    "commits": 19,
     "issues": 0,
     "name": null,
     "bio": null,
     "photo": "https://avatars2.githubusercontent.com/u/47512378?v=4"
   },
-  "total_commits": 25,
+  "total_commits": 58,
   "total_issues": 2
 }
