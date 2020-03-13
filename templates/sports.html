@@ -19,13 +19,22 @@
 <body>
 <br>
 <br>
-{% for i in range(0, num) %}
 <div style = "text-align: center;">
-	<img src = {{imgs[i]}} width=96 height=96>
+<table align = "center">
+{% for i in range(0, num) %}
+    {% if i is divisibleby 6 %}
+    <tr>	
+    {% endif %}
+    <td>
+	<img src = {{imgs[i]}} width=96 height=96><br>
 	<a class="btn btn-success" href="/sports/{{names[i]}}"> {{names[i]}}</a>
-	<img src = {{imgs[i]}} width=96 height=96>
-</div>
+    </td>
+    {% if i-i//6*6 == 5 or i==num-1 %}
+    </tr>
+    {% endif %}	
 {% endfor %}
+</table>
+</div>
 
 <nav class="navbar navbar-inverse navbar-fixed-top navbar-expand-lg justify-content-between">
   	<div class="container-fluid">
