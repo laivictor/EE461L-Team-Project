@@ -78,8 +78,9 @@ def open_sport(page_name):
     tb = [i for i in sport if i['name']==page_name][0]
     name = tb['name']
     img = '../../static/' + tb['img']
+    banner = tb['banner']
     return render_template(
-            'sports/sports_template.html', name = name, img = img)
+            'sports/sports_template.html', name = name, img = img, banner = banner)
 
 
     
