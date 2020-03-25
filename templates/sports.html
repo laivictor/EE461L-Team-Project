@@ -2,7 +2,9 @@
 <!DOCTYPE html>
 <html>
 <head>
-
+<style>
+th {font-size:60px}
+</style>
 	<title>Sports</title>
 	<meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -21,9 +23,22 @@
 <br>
 <div style = "text-align: center;">
 <table align = "center">
+<tr>
+    <th colspan="6">Summer Sports</th>
+</tr>
 {% for i in range(0, num) %}
-    {% if i is divisibleby 6 %}
-    <tr>	
+    {% if names[i] == "Alpine skiing" %}
+    <tr>
+	<th colspan="6">Winter Sports</th>
+    </tr>
+    {% endif %}
+    {% if names[i] == "Basque pelota" %}
+    <tr>
+	<th colspan="6">Historical</th>
+    </tr>
+    {% endif %}
+    {% if (i) is divisibleby 6 %}
+    <tr>
     {% endif %}
     <td>
 	<img src = {{imgs[i]}} width=96 height=96><br>
@@ -31,7 +46,7 @@
     </td>
     {% if i-i//6*6 == 5 or i==num-1 %}
     </tr>
-    {% endif %}	
+    {% endif %}
 {% endfor %}
 </table>
 </div>
