@@ -23,8 +23,36 @@
       </ul>
     </div>
   </nav>
-<br><br><br><br>
-<p>{{name}}</p>
-<img src={{img}}/>
+<div class="bg-image">
+<picture>
+<img src="{{banner}}?interpolation=lanczos-none&resize=1920:640" alt="{{name}}" class="lazyload"></picture>
+</div>
+<h1 style="margin-left: 20px">{{name}}</h1>
+<img style="margin-left: 20px" src={{img}}/>
+
+<table align = "center">
+{% set eventarray = events.split("|") %}
+{% for event in eventarray %}
+    <tr>
+    <td>
+    {% if event == "MEN" %}
+        <h2>{{event}}</h2>
+        {% continue %}
+    {% endif %}
+    {% if event == "WOMEN" %}
+        <h2>{{event}}</h2>
+        {% continue %}
+    {% endif %}
+    {% if event == "MIXED" %}
+        <h2>{{event}}</h2>
+        {% continue %}
+    {% endif %}
+    <h4>{{event}}</h4>
+    </td>
+    </tr>
+{% endfor %}
+
+
+</table>
 </body>
 </html>
