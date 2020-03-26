@@ -29,7 +29,11 @@ for x in f:
 f.close()
 index = 0
 for x in s:
-  name = x.replace('-',' ').capitalize()
+  name = x.replace('-',' ').split()
+  st_list = []
+  for n in name:
+    st_list.append(n.capitalize())
+  name = " ".join(st_list)
   f = open('sport.json', 'a+')
   st_list = []
   st_list.append('{"name":"' + name)

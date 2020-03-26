@@ -31,33 +31,21 @@
 <img style="margin-left: 20px" src={{img}}/>
 
 <table align = "center">
-{% set men = True %}
-{% set women = True %}
-{% set mixed = True %}
 {% set eventarray = events.split("|") %}
 {% for event in eventarray %}
     <tr>
     <td>
     {% if event == "MEN" %}
-        {% if men %}
-            {% set men = False %}
-            <h2>{{event}}</h1>
-            {% continue %}
-        {% endif %}
+        <h2>{{event}}</h2>
+        {% continue %}
     {% endif %}
     {% if event == "WOMEN" %}
-        {% if women %}
-            {% set women = False %}
-            <h2>{{event}}</h1>
-            {% continue %}
-        {% endif %}
+        <h2>{{event}}</h2>
+        {% continue %}
     {% endif %}
     {% if event == "MIXED" %}
-        {% if mixed %}
-            {% set mixed = False %}
-            <h2>{{event}}</h1>
-            {% continue %}
-        {% endif %}
+        <h2>{{event}}</h2>
+        {% continue %}
     {% endif %}
     <h4>{{event}}</h4>
     </td>

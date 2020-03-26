@@ -3,6 +3,7 @@ import json
 from json2html import *
 
 app = Flask(__name__)
+app.jinja_env.add_extension('jinja2.ext.loopcontrols')
 
 #to add more pages create more of these functions with /custom-url
 @app.route('/')
@@ -79,8 +80,9 @@ def open_sport(page_name):
     name = tb['name']
     img = '../../static/' + tb['img']
     banner = tb['banner']
+    events = tb['events']
     return render_template(
-            'sports/sports_template.html', name = name, img = img, banner = banner)
+            'sports/sports_template.html', name = name, img = img, banner = banner, events = events)
 
 
     
