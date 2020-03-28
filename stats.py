@@ -1,7 +1,8 @@
 from github import Github
 import json
+from config import ACCESS_TOKEN
 
-ACCESS_TOKEN = '398bdaefd7631962200e6d83872d2800fc4c4e96'
+#ACCESS_TOKEN = '398bdaefd7631962200e6d83872d2800fc4c4e96'
 
 g = Github(ACCESS_TOKEN)
 

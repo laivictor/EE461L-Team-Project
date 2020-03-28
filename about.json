@@ -1,46 +1,46 @@
 {
   "jdl3687": {
-    "commits": 6,
+    "commits": 9,
     "issues": 0,
     "name": "David Lok",
     "bio": null,
     "photo": "https://avatars2.githubusercontent.com/u/25232517?v=4"
   },
   "manuelavalos7": {
-    "commits": 7,
+    "commits": 10,
     "issues": 0,
     "name": null,
     "bio": null,
     "photo": "https://avatars1.githubusercontent.com/u/32210133?v=4"
   },
   "chris-acosta": {
-    "commits": 17,
+    "commits": 18,
     "issues": 0,
     "name": null,
-    "bio": null,
+    "bio": "I'm a third year ECE major with a primary tech core of Software Design. I enjoy music, video games, and movies!",
     "photo": "https://avatars3.githubusercontent.com/u/32726047?v=4"
   },
   "NimayRKumar": {
-    "commits": 9,
+    "commits": 10,
     "issues": 2,
     "name": "Nimay Kumar",
-    "bio": null,
+    "bio": "Senior ECE at the University of Texas at Zoom",
     "photo": "https://avatars0.githubusercontent.com/u/33074769?v=4"
   },
   "EsaZul": {
-    "commits": 0,
+    "commits": 2,
     "issues": 0,
     "name": "Eduardo Ruiz",
     "bio": null,
     "photo": "https://avatars0.githubusercontent.com/u/35593775?v=4"
   },
   "laivictor": {
-    "commits": 19,
+    "commits": 37,
     "issues": 0,
-    "name": null,
-    "bio": null,
+    "name": "Victor Lai",
+    "bio": "I'm a second year ECE student at the University of Texas at Austin. My hobbies include swimming and chess.",
     "photo": "https://avatars2.githubusercontent.com/u/47512378?v=4"
   },
-  "total_commits": 58,
+  "total_commits": 86,
   "total_issues": 2
 }
