@@ -2,7 +2,9 @@
 <!DOCTYPE html>
 <html>
 <head>
-
+<style>
+th {font-size:60px}
+</style>
 	<title>Sports</title>
 	<meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -17,13 +19,60 @@
 
 
 <body>
+<br>
+<br>
+<div style = "text-align: center;">
+<table align = "center">
+<tr>
+    <th colspan="6">Summer Sports</th>
+</tr>
+{% for i in range(0, 47) %}
+    {% if (i) is divisibleby 6 %}
+    <tr>
+    {% endif %}
+    <td>
+	<img src = {{imgs[i]}} width=96 height=96><br>
+	<a class="btn btn-success" href="/sports/{{names[i]}}"> {{names[i]}}</a>
+    </td>
+    {% if i-i//6*6 == 5 or i==46 %}
+    </tr>
+    {% endif %}
+{% endfor %}
+<tr>
+    <th colspan="6">Winter Sports</th>
+</tr>
+{% for i in range(0, num-47) %}
+    {% if i+47 == 62 %}
+    <tr>
+	<th colspan="6">Historical</th>
+    </tr>
+    {% endif %}
+    {% if (i) is divisibleby 6 %}
+    <tr>
+    {% endif %}
+    <td>
+	<img src = {{imgs[i+47]}} width=96 height=96><br>
+	<a class="btn btn-success" href="/sports/{{names[i+47]}}"> {{names[i+47]}}</a>
+    </td>
+    {% if i-i//6*6 == 5 or i==num-47 %}
+    </tr>
+    {% endif %}
+{% endfor %}
+</table>
+</div>
+
 <nav class="navbar navbar-inverse navbar-fixed-top navbar-expand-lg justify-content-between">
   	<div class="container-fluid">
   		<div class="navbar-header">
-  			<a class="navbar-brand" href="#"> Sports</a>
+  			<a class="navbar-brand" href="/"> The Olympics </a>
   		</div>
 	    <ul class="nav navbar-nav">
-	<li><a href="/"> Back </a></li>
+	    	<li><a href="/countries"> Countries </a></li>
+		<li><a href="/host-cities"> Host Cities </a></li>
+    <li><a href="/sports"> Sports </a></li>
+      </ul>
+    </div>
+  </nav>
 
 </body>
 </html>

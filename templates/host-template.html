@@ -3,7 +3,7 @@
 <html>
 <head>
 
-	<title>Venues</title>
+	<title>Host Cities</title>
 	<meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
@@ -13,17 +13,19 @@
 </head>
 
 
-<body style="padding-top: 100px">
+<body style="padding-top: 100px; width:70%; margin: 0 auto">
 	<nav class="navbar navbar-inverse navbar-fixed-top navbar-expand-lg justify-content-between">
-		<div class="container-fluid">
-			<div class="navbar-header">
-				<a class="navbar-brand" href="/venues"> Venues</a>
-			</div>
-			<ul class="nav navbar-nav">
-				<li><a href="/venues"> Back </a></li>
-			</ul>
-		</div>
-	</nav>
+  	<div class="container-fluid">
+  		<div class="navbar-header">
+  			<a class="navbar-brand" href="/"> The Olympics </a>
+  		</div>
+	    <ul class="nav navbar-nav">
+	    	<li><a href="/countries"> Countries </a></li>
+		<li><a href="/host-cities"> Host Cities </a></li>
+    <li><a href="/sports"> Sports </a></li>
+      </ul>
+    </div>
+  </nav>
 
 	<div id="game-title" style="margin: auto; text-align: center;">
 		<h1 class="display-1" >{{obj['city']}} {{ obj['year']}} <small>{{obj['season']}}</small></h1>
