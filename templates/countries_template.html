@@ -2,16 +2,6 @@
 <html>
 <head>
 
-	<style>
-		.datatable{
-			text-align: center;
-			margin-left:auto;
-    		margin-right:auto;
-			border-collapse: collapse;
-			border: 1px solid black;
-		}
-	</style>
-
 	<title>Countries</title>
 	<meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -28,7 +18,47 @@
 <br>
 <br>
 
-{{table | safe}}
+<div style="margin: auto; text-align: center;">
+	<h1> {{country|safe}} </h1>
+</div>
+
+<br>
+<br>
+
+<table class="table">
+	<thead>
+		<tr>
+			<th>Games</th>
+			<th>Flag Bearer</th>
+			<th>Total Participants</th>
+			<th>Male Participants</th>
+			<th>Female Participants</th>
+			<th># of Sports Participated</th>
+			<th># of Gold Medals</th>
+			<th># of Silver Medals</th>
+			<th># of Bronze Medals</th>
+			<th>Total Medals</th>
+			<th>Top Medalists</th>
+		</tr>
+	</thead>
+	{% for r in table %}
+	<tbody>
+		<tr>
+			<td> {{r['games'] | safe}} </td>
+			<td> {{r['flag bearer'] | safe}} </td>
+			<td> {{r['participants'] | safe}} </td>
+			<td> {{r['participants-men'] | safe}} </td>
+			<td> {{r['participants-women'] | safe}} </td>
+			<td> {{r['sports'] | safe}} </td>
+			<td> {{r['Gold'] | safe}} </td>
+			<td> {{r['Silver'] | safe}} </td>
+			<td> {{r['Bronze'] | safe}} </td>
+			<td> {{r['Total'] | safe}} </td>
+			<td> {{r['top medalists'] | safe}} </td>
+		</tr>
+	</tbody>
+	{% endfor %}
+</table>
 
 <nav class="navbar navbar-inverse navbar-fixed-top navbar-expand-lg justify-content-between">
   	<div class="container-fluid">
