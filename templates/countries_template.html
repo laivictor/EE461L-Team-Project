@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+	<title>Countries</title>
+	<meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+	<title></title>
+</head>
+
+<body style="padding-top: 100px; width:70%; margin: 0 auto">
+
+<div style="margin: auto; text-align: center;">
+	<h1> {{country|safe}} </h1>
+</div>
+<br>
+
+<table class="table">
+	<thead>
+		<tr>
+			<th>Games</th>
+			<th>Flag Bearer</th>
+			<th>Total Participants</th>
+			<th>Male Participants</th>
+			<th>Female Participants</th>
+			<th># of Sports Participated</th>
+			<th># of Gold Medals</th>
+			<th># of Silver Medals</th>
+			<th># of Bronze Medals</th>
+			<th>Total Medals</th>
+			<th>Top Medalists</th>
+		</tr>
+	</thead>
+	{% for r in table %}
+	<tbody>
+		<tr>
+			<td> {{r['games'] | safe}} </td>
+			<td> {{r['flag bearer'] | safe}} </td>
+			<td> {{r['participants'] | safe}} </td>
+			<td> {{r['participants-men'] | safe}} </td>
+			<td> {{r['participants-women'] | safe}} </td>
+			<td> {{r['sports'] | safe}} </td>
+			<td> {{r['Gold'] | safe}} </td>
+			<td> {{r['Silver'] | safe}} </td>
+			<td> {{r['Bronze'] | safe}} </td>
+			<td> {{r['Total'] | safe}} </td>
+			<td> {{r['top medalists'] | safe}} </td>
+		</tr>
+	</tbody>
+	{% endfor %}
+</table>
+
+<nav class="navbar navbar-inverse navbar-fixed-top navbar-expand-lg justify-content-between">
+  	<div class="container-fluid">
+  		<div class="navbar-header">
+  			<a class="navbar-brand" href="/"> The Olympics </a>
+  		</div>
+	    <ul class="nav navbar-nav">
+	    	<li><a href="/countries"> Countries </a></li>
+		<li><a href="/host-cities"> Host Cities </a></li>
+    <li><a href="/sports"> Sports </a></li>
+      </ul>
+    </div>
+  </nav>
+</body>
+
+<body>
+
+
+</body>
+
+</html>

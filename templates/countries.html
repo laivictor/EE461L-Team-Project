@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<style>
+	.country{
+		display:inline-block;
+		float:left;
+		height: 200px;
+		width: 200px;
+		border:1px solid black;
+		border-radius:20px;
+		margin-left: 11px;
+		margin-bottom: 11px;
+		background-color: beige;
+		text-align: center;
+		color: black;
+	}
+</style>
+
+	<title>Countries</title>
+	<meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+	<title></title>
+</head>
+
+<body style="padding-top:100px; width:70%; margin: 0 auto">
+
+<h1>Countries</h1>
+<br>
+
+{% for c in countries%}
+	<a href="/countries/{{c['country']}}"> 
+		<div class = "country">
+			<h4>{{c['country']}}</h4>
+			<img src = {{c['img']}} width=35 height=20 >
+			<br><br>
+			{% set gold = namespace(value=0) %}
+			{% set silver = namespace(value=0) %}
+			{% set bronze = namespace(value=0) %}
+			{% for m in c['data'] %}
+				{% set gold.value = gold.value +  (m['Gold'] | int)%}
+				{% set silver.value = silver.value +  (m['Silver'] | int)%}
+				{% set bronze.value = bronze.value +  (m['Bronze'] | int)%}
+			{% endfor %}
+			<h5> Gold: {{gold.value}}</h5>
+			<h5> Silver: {{silver.value}}</h5>
+			<h5> Bronze: {{bronze.value}}</h5>
+		</div>
+	</a>	
+{% endfor %}
+
+<nav class="navbar navbar-inverse navbar-fixed-top navbar-expand-lg justify-content-between">
+  	<div class="container-fluid">
+  		<div class="navbar-header">
+  			<a class="navbar-brand" href="/"> The Olympics </a>
+  		</div>
+	    <ul class="nav navbar-nav">
+	    	<li><a href="/countries"> Countries </a></li>
+		<li><a href="/host-cities"> Host Cities </a></li>
+    <li><a href="/sports"> Sports </a></li>
+      </ul>
+    </div>
+  </nav>
+</body>
+
+<body>
+
+
+</body>
+
+</html>
