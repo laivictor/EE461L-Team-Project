@@ -14,11 +14,6 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.12/js/dataTables.bootstrap.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-	<script>
-		$(document).ready(function() {
-			$('#table').DataTable();
-		  });
-		</script>
 	<title></title>
 </head>
 
@@ -43,6 +38,7 @@
 	<table class="table">
 		<thead>
 			<tr>
+				<th></th>
 				<th>Year</th>
 				<th>Season</th>
 				<th>Host City</th>
@@ -52,12 +48,15 @@
 				<th># of Events</th>
 			</tr>
 		</thead>
+
 	{% for key in obj.keys(): %}
+	
 		<tbody>
 			<tr>
+				<td><a href="host-cities/select?game={{key}}"><img src="{{'../static/host-cities/logos/' + obj[key]['logo']}}"  /> </a></td>
 				<td>{{obj[key]['year']     }}</td>
 				<td>{{obj[key]['season']   }}</td>
-				<td><a href= "{{'/host-cities/select?game=' + key}}">{{obj[key]['city']     }}</a> </td>
+				<td><a href= "{{'/host-cities/select?game=' + key}}">{{obj[key]['city']}}</a> </td>
 				<td>{{obj[key]['country']  }}</td>
 				<td>{{obj[key]['countries']}}</td>
 				<td>{{obj[key]['athletes'] }}</td>
@@ -66,6 +65,21 @@
 		</tbody>
 	{% endfor %}
 	</table>
-	
+	{% set next = (page+1)  %}
+
+
+	<p>Page {{page}} 
+		
+		
+		{% if page < 12 %}
+			<a href="{{'host-cities?page=' + next|string}}">next</a> 
+		{% endif %}
+
+		{% if page>0 %}
+			{% set prev = page-1 %}
+			<a href="{{'host-cities?page=' + prev|string}}"> prev </a>
+		{% endif %}
+
+	</p>
 </body>
 </html>

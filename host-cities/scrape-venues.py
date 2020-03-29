@@ -4,7 +4,7 @@ import urllib.request
 import time
 from bs4 import BeautifulSoup
 
-
+import sys
 import os.path
 from os import path
 
@@ -157,7 +157,7 @@ def make_dictionary(array_from_scrape):
         countries = array_from_scrape[4][1]
         events = array_from_scrape[5][1]
         mdl = medal_table(season, year)
-    logo = array_from_scrape[7]
+    logo = year+season+".png"
     
     if int(year) == 2028:
         country = "United States of America"
@@ -167,17 +167,30 @@ def make_dictionary(array_from_scrape):
              "countries":countries, "events":events, "logo":logo, "medal_table":mdl}
     return obj
 
+def set_logo():
+    with open("venues.json") as f:
+        obj = json.load(f)
+    for key in obj:
+        obj[key]['logo'] = obj[key]['year'] + obj[key]['season'] + '.png'
+    print("set logos")
+    with open('venues.json', 'w') as fp:
+            json.dump(obj, fp)
 
 if __name__ == "__main__":
-    links = get_links()
-    data = {}
-    for link in links:
-        dictionary = make_dictionary(scrape_hosts_info(link))
-        #if(int(dictionary['year'])):
-        data[dictionary['year']+dictionary['season']] = dictionary
+    if sys.argv[1] == 'set':
+        set_logo()
+    elif sys.argv[1] == 'scrape':
+        links = get_links()
+        data = {}
+        for link in links:
+            dictionary = make_dictionary(scrape_hosts_info(link))
+            #if(int(dictionary['year'])):
+            data[dictionary['year']+dictionary['season']] = dictionary
 
-    with open('venues.json', 'w') as fp:
-        json.dump(data, fp)
+        with open('venues.json', 'w') as fp:
+            json.dump(data, fp)
+    else:
+        print("Must use 'scrape' or 'set' argument in scrape-venues.py")
     
 
 

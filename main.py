@@ -38,14 +38,34 @@ def open_country(page_name):
 
 @app.route('/host-cities')
 def venues():
+    page = request.args.get('page')
+    if page == None:
+        page = 1
+
+    if(int(page)>12):
+        page = 12
 
     data = None
     with open("host-cities/venues.json") as f:
         data = json.load(f)
     obj = json.dumps(data, indent=4, sort_keys=True)
+    new_obj = {}
+    count = 0
+    
+    keys = data.keys()
+    print(keys)
+
+    for key in keys:
+        #print(key)
+        if count >= (int(page)-1)*5 and count <int(page)*5:
+            new_obj[key] = data[key]
+        count+=1
+
+    
+
     print(type(obj))
     return render_template(
-            'host-cities.html', obj=data)
+            'host-cities.html', obj=new_obj, page=int(page))
 
 @app.route('/host-cities/select')
 def select():
