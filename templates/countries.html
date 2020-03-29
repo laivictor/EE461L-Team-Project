@@ -3,22 +3,18 @@
 <head>
 
 <style>
-	.countrybutton{
-		background-color: #FFF;
-		border: 1px solid black;
-		color: black;
-		padding: 5px 10px;
-		text-decoration: none;
-		display: inline-block;
-		font-size: 15px;
-		font-weight: 500;
-		border-radius:10px;
-		margin-bottom: 10px;
-		margin-right: 10px;
-		margin-left: 10px;
-	}
-	.countrycontainer{
+	.country{
+		display:inline-block;
+		float:left;
+		height: 200px;
+		width: 200px;
+		border:1px solid black;
+		border-radius:20px;
+		margin-left: 11px;
+		margin-bottom: 11px;
+		background-color: beige;
 		text-align: center;
+		color: black;
 	}
 </style>
 
@@ -31,22 +27,31 @@
 	<title></title>
 </head>
 
-<li><a href="countries"> Countries </a></li>
+<body style="padding-top:100px; width:70%; margin: 0 auto">
 
-<body>
-
+<h1>Countries</h1>
 <br>
-<br>
-
 
 {% for c in countries%}
-<div style = "text-align: center;">
-	<img src = {{c['img']}} width=35 height=20>
-	<a class="countrybutton" href="/countries/{{c['country']}}"> {{c['country']}}</a>
-	<img src = {{c['img']}} width=35 height=20>
-</div>
+	<a href="/countries/{{c['country']}}"> 
+		<div class = "country">
+			<h4>{{c['country']}}</h4>
+			<img src = {{c['img']}} width=35 height=20 >
+			<br><br>
+			{% set gold = namespace(value=0) %}
+			{% set silver = namespace(value=0) %}
+			{% set bronze = namespace(value=0) %}
+			{% for m in c['data'] %}
+				{% set gold.value = gold.value +  (m['Gold'] | int)%}
+				{% set silver.value = silver.value +  (m['Silver'] | int)%}
+				{% set bronze.value = bronze.value +  (m['Bronze'] | int)%}
+			{% endfor %}
+			<h5> Gold: {{gold.value}}</h5>
+			<h5> Silver: {{silver.value}}</h5>
+			<h5> Bronze: {{bronze.value}}</h5>
+		</div>
+	</a>	
 {% endfor %}
-
 
 <nav class="navbar navbar-inverse navbar-fixed-top navbar-expand-lg justify-content-between">
   	<div class="container-fluid">
