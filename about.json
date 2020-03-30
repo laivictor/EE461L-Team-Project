@@ -7,21 +7,21 @@
     "photo": "https://avatars2.githubusercontent.com/u/25232517?v=4"
   },
   "manuelavalos7": {
-    "commits": 10,
+    "commits": 11,
     "issues": 0,
     "name": null,
     "bio": null,
     "photo": "https://avatars1.githubusercontent.com/u/32210133?v=4"
   },
   "chris-acosta": {
-    "commits": 18,
+    "commits": 21,
     "issues": 0,
     "name": null,
     "bio": "I'm a third year ECE major with a primary tech core of Software Design. I enjoy music, video games, and movies!",
     "photo": "https://avatars3.githubusercontent.com/u/32726047?v=4"
   },
   "NimayRKumar": {
-    "commits": 10,
+    "commits": 11,
     "issues": 2,
     "name": "Nimay Kumar",
     "bio": "Senior ECE at the University of Texas at Zoom",
@@ -41,6 +41,6 @@
     "bio": "I'm a second year ECE student at the University of Texas at Austin. My hobbies include swimming and chess.",
     "photo": "https://avatars2.githubusercontent.com/u/47512378?v=4"
   },
-  "total_commits": 86,
+  "total_commits": 91,
   "total_issues": 2
 }
