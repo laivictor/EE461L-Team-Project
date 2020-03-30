@@ -126,8 +126,8 @@ def medal_table(season, year):
     if(int(year) > 2018):
         return None
     print(year)
-    url = "https://www.topendsports.com/events/" + season.lower() + "/medal-tally/" + year + ".htm"
-    filename = "responses/medal_tables/"+year+"-"+season +".html"
+    url = "https://www.topendsports.com/events/" + season.lower() + "/medal-tally/" + str(year) + ".htm"
+    filename = "responses/medal_tables/"+str(year)+"-"+season +".html"
 
     if(not path.exists(filename)):
         get_response(url, filename)
@@ -143,7 +143,8 @@ def medal_table(season, year):
 
 def make_dictionary(array_from_scrape):
     city =  " ".join(array_from_scrape[0][0:len(array_from_scrape[0])-1])
-    year = array_from_scrape[0][-1]
+    year = int(array_from_scrape[0][-1])
+    print(type(year))
     date = array_from_scrape[1][1]
     country = array_from_scrape[2][1]
     season = array_from_scrape[6]
@@ -153,11 +154,11 @@ def make_dictionary(array_from_scrape):
         events = "TBD"
         mdl = "<p>TBD</p>"
     else:
-        athletes = array_from_scrape[3][1]
-        countries = array_from_scrape[4][1]
-        events = array_from_scrape[5][1]
+        athletes = int(array_from_scrape[3][1])
+        countries = int(array_from_scrape[4][1])
+        events = int(array_from_scrape[5][1])
         mdl = medal_table(season, year)
-    logo = year+season+".png"
+    logo = str(year)+season+".png"
     
     if int(year) == 2028:
         country = "United States of America"
@@ -171,7 +172,7 @@ def set_logo():
     with open("venues.json") as f:
         obj = json.load(f)
     for key in obj:
-        obj[key]['logo'] = obj[key]['year'] + obj[key]['season'] + '.png'
+        obj[key]['logo'] = str(obj[key]['year']) + obj[key]['season'] + '.png'
     print("set logos")
     with open('venues.json', 'w') as fp:
             json.dump(obj, fp)
@@ -185,7 +186,7 @@ if __name__ == "__main__":
         for link in links:
             dictionary = make_dictionary(scrape_hosts_info(link))
             #if(int(dictionary['year'])):
-            data[dictionary['year']+dictionary['season']] = dictionary
+            data[str(dictionary['year'])+dictionary['season']] = dictionary
 
         with open('venues.json', 'w') as fp:
             json.dump(data, fp)
