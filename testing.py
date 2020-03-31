@@ -18,6 +18,8 @@ class TestingStats(unittest.TestCase):
 		self.assertEqual(data['total_commits'], test_comm)
 		self.assertEqual(data['total_issues'], test_iss)
 
+		self.assertRaises(ImportError)
+
 
 
 if __name__ == "__main__":
