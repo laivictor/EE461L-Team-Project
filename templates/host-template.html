@@ -3,17 +3,24 @@
 <html>
 <head>
 
-	<title>Host Cities</title>
+	<title>Olympic Games: {{obj['city']}} {{ obj['year']}}</title>
 	<meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+	<script type=text/javascript>
+		function img_path() {
+			var obj = {{ obj|tojson|safe }};
+			var path = "../static/host-cities/logos/" + obj['year'] + obj['season'] + ".png";
+			document.getElementById('image').src = path;
+		}
+	</script>
 	<title></title>
 </head>
 
 
-<body style="padding-top: 100px; width:70%; margin: 0 auto">
+<body style="padding-top: 100px; width:70%; margin: 0 auto" onload="img_path()">
 	<nav class="navbar navbar-inverse navbar-fixed-top navbar-expand-lg justify-content-between">
   	<div class="container-fluid">
   		<div class="navbar-header">
@@ -30,9 +37,8 @@
 	<div id="game-title" style="margin: auto; text-align: center;">
 		<h1 class="display-1" >{{obj['city']}} {{ obj['year']}} <small>{{obj['season']}}</small></h1>
 	</div>
-
 	<div style="margin: 0 auto; text-align: center">
-		<img src="{{obj['logo']}}"/>
+		<img src="../static/images/whitebg.png" id="image"/>
 	</div>
 
 	<table class="table">
