@@ -1,6 +1,7 @@
 from flask import Flask, render_template, request, Markup
 import json
 from json2html import *
+import countrydb
 
 app = Flask(__name__)
 app.jinja_env.add_extension('jinja2.ext.loopcontrols')
@@ -33,20 +34,24 @@ def index():
 
 @app.route('/countries')
 def countries():
-    with open('countries.json') as json_file:
-        countries = json.load(json_file)
+    countries = countrydb.get_all_countries()
     countries = sorted(countries, key = lambda i: i['country'])
+    page = request.args.get('page')
+    if page == None:
+        page = 1
+    page = int(page)
+    countries = countries[(page-1)*16 : page*16]
     return render_template(
-            'countries.html', countries = countries)
+            'countries.html', countries = countries, page = page)
 
 @app.route('/countries/<string:page_name>/')
 def open_country(page_name):
-    with open('countries.json') as json_file:
-        countries = json.load(json_file)
+    countries = countrydb.get_all_countries()
     tb = [i for i in countries if i['country']==page_name][0]
-    del tb['img']
-    table = json2html.convert(json = tb) #,table_attributes="class=\"datatable\""
-    return render_template('countries_template.html', table = table)
+    tb = [{k: v for k, v in d.items() if k !='ranker'} for d in tb['data']]
+    for i in tb:
+        i.update({"games" : '<a href="/host-cities/select?game=' + i["games"].replace(' ', '') + '">' + i["games"] + '</a>'})    
+    return render_template('countries_template.html', table = tb, country = page_name)
     
 @app.route('/host-cities')
 def venues():

@@ -16,6 +16,27 @@
 		text-align: center;
 		color: black;
 	}
+	.parent { 
+		max-width: 800px; 
+		width: 100%; 
+		margin: 0 auto;
+		border: 1px solid black;
+		border-radius: 10px;
+		padding: 10px;
+	}
+	.row { 
+		width: 100%;
+		letter-spacing: -0.31em;
+	}
+	.col{ 
+		display: inline-block;
+		vertical-align: top;
+		border: 1px solid black;
+		background: #ccc;
+		padding: 5px;
+		margin: 5px 0.5%;
+		letter-spacing: normal;
+	}
 </style>
 
 	<title>Countries</title>
@@ -27,12 +48,15 @@
 	<title></title>
 </head>
 
-<body style="padding-top:100px; width:70%; margin: 0 auto">
-
+<body style="padding-top:100px; max-width:70%; margin: 0 auto;">
 <h1>Countries</h1>
 <br>
 
+{% set count = namespace(value=0) %}
 {% for c in countries%}
+	{% if (count.value) is divisibleby 4 %}
+		<div style="width:100%">
+	{% endif %}
 	<a href="/countries/{{c['country']}}"> 
 		<div class = "country">
 			<h4>{{c['country']}}</h4>
@@ -50,8 +74,25 @@
 			<h5> Silver: {{silver.value}}</h5>
 			<h5> Bronze: {{bronze.value}}</h5>
 		</div>
-	</a>	
+	</a>
+	{% if count.value-count.value//4*4 == 3 or count.value==227 %}
+		</div>
+	{% endif %}
+{% set count.value = count.value + 1 %}	
 {% endfor %}
+
+<div style="position: relative; float:left; width:100%; height: 20px;">
+	<div style="padding-top: 20px; padding-bottom: 20px;">
+		{% if page - 1 != 0 %}
+		<a style="padding-right: 15px;" href="countries?page={{page - 1}}">Previous</a>
+		{% endif %}
+		Page {{page}} of 15
+		{% if page + 1 < 16 %}
+		<a style="padding-left: 15px;"href="countries?page={{page + 1}}">Next</a> 
+		{% endif %}
+	</div>
+</div>
+
 
 <nav class="navbar navbar-inverse navbar-fixed-top navbar-expand-lg justify-content-between">
   	<div class="container-fluid">
@@ -65,10 +106,6 @@
       </ul>
     </div>
   </nav>
-</body>
-
-<body>
-
 
 </body>
 
