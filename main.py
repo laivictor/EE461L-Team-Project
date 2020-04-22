@@ -34,15 +34,10 @@ def index():
 
 @app.route('/countries')
 def countries():
-    countries = countrydb.get_all_countries()
-    countries = sorted(countries, key = lambda i: i['country'])
-    page = request.args.get('page')
-    if page == None:
-        page = 1
-    page = int(page)
-    countries = countries[(page-1)*16 : page*16]
+    allcountries = countrydb.get_all_countries()
+    allcountries = sorted(allcountries, key = lambda i: i['country'])
     return render_template(
-            'countries.html', countries = countries, page = page)
+            'countries.html', allcountries = allcountries)
 
 @app.route('/countries/<string:page_name>/')
 def open_country(page_name):
