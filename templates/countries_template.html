@@ -9,16 +9,22 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 	<title></title>
+
+	<style>
+		th{
+			text-align: center;
+		}
+	</style>
 </head>
 
-<body style="padding-top: 100px; width:70%; margin: 0 auto">
+<body style="padding-top: 87px; width: 95%; margin: 0 auto; text-align: center;">
 
 <div style="margin: auto; text-align: center;">
 	<h1> {{country|safe}} </h1>
 </div>
 <br>
 
-<table class="table">
+<table class="table" style = "width: 70%; margin:auto">
 	<thead>
 		<tr>
 			<th>Games</th>
@@ -52,6 +58,43 @@
 	</tbody>
 	{% endfor %}
 </table>
+<br><br>
+
+<!-- Medal Bar Chart -->
+<canvas id = "myChart" height = "200" width = "400"></canvas>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+<script>
+	var ctx = document.getElementById('myChart').getContext('2d');
+	var xlabels = []
+	{% for y in years %}
+		xlabels.push('{{y}}');
+	{% endfor %}
+	var gold = []
+	var silver = []
+	var bronze = []
+	{% for r in table %}
+		{% set g = (r['Gold'] | int) %}
+		{% set s = (r['Silver'] | int) %}
+		{% set b = (r['Bronze'] | int )%}
+		gold.push({{g}});
+		silver.push({{s}});
+		bronze.push({{b}});
+	{% endfor %}
+	var myChart = new Chart(ctx, {
+		type: 'bar',
+		data: {
+			labels: xlabels,
+			datasets: [
+				{ label: '# of Gold', data: gold, backgroundColor: 'rgba(255, 206, 86, 0.2)', borderColor: 'rgba(255, 206, 86, 1)', borderWidth: 1},
+				{ label: '# of Silver', data: silver, backgroundColor: 'rgba(192, 192, 192, 0.2)', borderColor: 'rgba(192, 192, 192, 1)', borderWidth: 1},
+				{ label: '# of Bronze', data: bronze, backgroundColor: 'rgba(205, 127, 50, .2)', borderColor: 'rgba(205, 127, 50, 1)', borderWidth: 1}
+			]
+		},
+		options: { title: {display: true, text: 'Medal Progression'}, legend: {position: 'bottom'}, scales: { yAxes: [{ gridLines:{display:false}, scaleLabel: {display: true, labelString: 'Total Medals'}, 
+		stacked: true, ticks: {beginAtZero: true, precision: 0} }], xAxes: [ {scaleLabel: {display: true, labelString: 'Year/Season'}, stacked: true, ticks: {beginAtZero: true}}] } }
+	});
+</script>
+<br><br>
 
 <nav class="navbar navbar-inverse navbar-fixed-top navbar-expand-lg justify-content-between">
   	<div class="container-fluid">

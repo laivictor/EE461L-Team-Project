@@ -44,9 +44,10 @@ def open_country(page_name):
     countries = countrydb.get_all_countries()
     tb = [i for i in countries if i['country']==page_name][0]
     tb = [{k: v for k, v in d.items() if k !='ranker'} for d in tb['data']]
+    years = [i['games'] for i in tb]
     for i in tb:
         i.update({"games" : '<a href="/host-cities/select?game=' + i["games"].replace(' ', '') + '">' + i["games"] + '</a>'})    
-    return render_template('countries_template.html', table = tb, country = page_name)
+    return render_template('countries_template.html', table = tb, country = page_name, years = years)
     
 @app.route('/host-cities')
 def venues():
