@@ -1,24 +1,68 @@
 <!DOCTYPE html>
-<html>
+<html lang = "en">
 <head>
 
 <style>
-	.countrybutton{
-		background-color: #FFF;
-		border: 1px solid black;
-		color: black;
-		padding: 5px 10px;
-		text-decoration: none;
-		display: inline-block;
-		font-size: 15px;
-		font-weight: 500;
-		border-radius:10px;
-		margin-bottom: 10px;
-		margin-right: 10px;
-		margin-left: 10px;
+	.cards {
+		display: grid;
+		grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); 
+		grid-auto-rows: minmax(200px, auto);
+		grid-gap: 1rem;
+		margin-left: 15px;
+		margin-right: 15px;
 	}
-	.countrycontainer{
+	.card {
+		border: 2px solid #e7e7e7;
+		border-radius: 4px;
+		padding: .5rem;
+		-webkit-box-shadow: 0 2px 2px rgba(0, 0, 0, 0.15);
+		box-shadow: 0 2px 2px rgba(0, 0, 0, 0.15);
+		display: flex;
+		-ms-flex-direction: column;
+		flex-direction: column;
+		position: relative;
+		color: #5d5e5e;
 		text-align: center;
+	}
+	.controls{
+		display: flex;
+		justify-content: center;
+		margin: 20px 0 10px 0;
+	}
+	/*
+	button{
+		color:#FFF;
+		background-color: #6c757d;
+		display: inline-block;
+		font-weight: 400;
+		text-align: center;
+		white-space: nowrap;
+		vertical-align: middle;
+		user-select: none;
+		border: 1px solid transparent;
+		padding: .2rem .6rem;
+		font-size: 1rem;
+		line-height: 1.5;
+		border-radius: .25rem;
+		margin: 0 3px;
+	}
+	*/
+	.jplist-selected{
+		background-color: #007bff;
+		border-color: #007bff;
+	}
+	[data-jplist-control="pagination"]{
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		flex-direction: column;
+	}
+	select{
+		margin: 0 10px;
+	}
+	[data-type="info"]{
+		font-size: 13px;
+		color: #007bff;;
 	}
 </style>
 
@@ -29,21 +73,135 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 	<title></title>
+
+	<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+      google.charts.load('current', {
+        'packages':['geochart'],
+        'mapsApiKey': 'AIzaSyBnGXZ32PsrGhv_s4f6yF-OD9TZQ2gIlvc'
+      });
+      google.charts.setOnLoadCallback(drawRegionsMap);
+      function drawRegionsMap() {
+		var medals = [['Country', 'Total Medals']]
+		{% for c in allcountries %}
+			{% set total = namespace(value=0) %}
+			{% for m in c['data'] %}
+				{% set total.value = total.value +  (m['Gold'] | int) + (m['Silver'] | int) + (m['Bronze'] | int)%}
+			{% endfor %}
+			medals.push(['{{c['country']}}', {{total.value}}]);
+		{% endfor %}
+        var data = google.visualization.arrayToDataTable(medals);
+		var options = {};
+        var chart = new google.visualization.GeoChart(document.getElementById('regions_div'));
+        google.visualization.events.addListener(chart, 'select', function () {
+        var selection = chart.getSelection();
+            if (selection.length > 0) {
+                var country = data.getValue(selection[0].row, 0);
+                window.location.href = '/countries/' + String(country);
+            }
+        });
+        chart.draw(data, options);
+      }
+	</script>
+
+	<link href="static/css/jplist.styles.css" rel="stylesheet" type="text/css" />
 </head>
 
-<li><a href="countries"> Countries </a></li>
-
-<body>
-
+<body style="padding-top:50px;"></body>
+<h1 style="margin-left: 15px;">Countries</h1>
 <br>
-<br>
-{% for i in range(0, num) %}
-<div style = "text-align: center;">
-	<img src = {{imgs[i]}} width=35 height=20>
-	<a class="countrybutton" href="/countries/{{names[i]}}"> {{names[i]}}</a>
-	<img src = {{imgs[i]}} width=35 height=20>
+<!-- Interactive World Map -->
+<div id="regions_div" style="padding-bottom: 50px; cursor: pointer; margin-right: 15px;"></div>
+
+<!-- Search by country name -->
+<input data-jplist-control="textbox-filter" data-group="group1" data-clear-btn-id="title-clear-btn" data-name="filter" data-path=".card" type="text" 
+	value="" placeholder="Search for country" data-id="search" style = "margin-left: 15px;"/>
+<button type="button" id="title-clear-btn" style="margin-right: 20px;">Clear</button>
+
+<!-- Sorting -->
+<select data-jplist-control="select-sort" data-group="group1" data-name="search" data-id="sort" style = "margin-right: 20px;">
+    <option value="0" data-path="default">Sort by</option>
+	<option value="1" data-path=".card" data-order="asc" data-type="text" selected>Country A-Z</option> 
+	<option value="2" data-path=".card" data-order="desc" data-type="text">Country Z-A</option>
+	<option value="3" data-path=".total" data-order="asc" data-type="number">Total Medals: Low to High</option>
+	<option value="4" data-path=".total" data-order="desc" data-type="number">Total Medals: High to Low</option>
+	<option value="5" data-path=".gold" data-order="asc" data-type="number">Gold Medals: Low to High</option>
+    <option value="6" data-path=".gold" data-order="desc" data-type="number">Gold Medals: High to Low</option>
+    <option value="7" data-path=".silver" data-order="asc" data-type="number">Silver Medals: Low to High</option>
+    <option value="8" data-path=".silver" data-order="desc" data-type="number">Silver Medals: High to Low</option>
+    <option value="9" data-path=".bronze" data-order="asc" data-type="number">Bronze Medals: Low to High</option>
+    <option value="10" data-path=".bronze" data-order="desc" data-type="number">Bronze Medals: High to Low</option>
+</select>
+
+<!-- Filtering -->
+<input type="radio" data-jplist-control="radio-buttons-text-filter" data-id="filter1" data-path="default" data-group="group1" data-name="name1" name="name1" checked> All </input>
+<input type="radio" data-jplist-control="radio-buttons-text-filter" data-id="filter2" data-path=".continent" data-group="group1" data-name="name1" name="name1"value="NA" >  North America </input>
+<input type="radio" data-jplist-control="radio-buttons-text-filter" data-id="filter3" data-path=".continent" data-group="group1" data-name="name1" name="name1" value="SA" >  South America </input>
+<input type="radio" data-jplist-control="radio-buttons-text-filter" data-id="filter4" data-path=".continent" data-group="group1" data-name="name1" name="name1" value="AS" >  Asia </input>
+<input type="radio" data-jplist-control="radio-buttons-text-filter" data-id="filter5" data-path=".continent" data-group="group1" data-name="name1" name="name1" value="AF" >  Africa </input>
+<input type="radio" data-jplist-control="radio-buttons-text-filter" data-id="filter6" data-path=".continent" data-group="group1" data-name="name1" name="name1" value="EU" >  Europe </input>
+<input type="radio" data-jplist-control="radio-buttons-text-filter" data-id="filter7" data-path=".continent" data-group="group1" data-name="name1" name="name1" value="OC" >  Oceania </input>
+
+<!-- Pagination -->
+<div class="controls" data-jplist-control="pagination" data-group="group1" data-items-per-page="20" data-current-page="0" data-name="pagination" data-id="paginate">
+	<div class="row mb-3">
+		<!-- <button type="button" data-type="first">«</button> -->
+		<!-- <button type="button" data-type="prev">‹</button> -->
+		<div class="jplist-holder" data-type="pages">
+			<button type="button" data-type="page">{pageNumber}</button>
+		</div>
+		<!-- <button type="button" data-type="next">›</button> -->
+		<!-- <button type="button" data-type="last">»</button> -->
+	</div>
+	<br>
+	<div class="row"> 
+		<select data-type="items-per-page">
+			<option value="12"> 12 per page </option>
+			<option value="20"> 20 per page </option>
+			<option value="28"> 28 per page </option>
+			<option value="0"> view all </option>
+		</select>
+		<span data-type="info">
+			Page {pageNumber} of {pagesNumber}
+		</span>
+	</div>
 </div>
-{% endfor %}
+
+<!-- Grid of countries -->
+<div class = "cards" data-jplist-group="group1">
+	{% for c in allcountries %}
+	<div data-jplist-item>
+		<a href = "/countries/{{c['country']}}">
+			<div class = "card">
+				<h4>{{c['country']}}</h4>
+				<img src = {{c['img']}} width=35 height=20 style="margin: auto;">
+				{% set gold = namespace(value=0) %}
+				{% set silver = namespace(value=0) %}
+				{% set bronze = namespace(value=0) %}
+				{% for m in c['data'] %}
+					{% set gold.value = gold.value +  (m['Gold'] | int)%}
+					{% set silver.value = silver.value +  (m['Silver'] | int)%}
+					{% set bronze.value = bronze.value +  (m['Bronze'] | int)%}
+				{% endfor %}
+				<h5> Gold: {{gold.value}}</h5> <h5 class = "gold" style = "display: none;"> {{gold.value}}</h5>
+				<h5> Silver: {{silver.value}}</h5> <h5 class = "silver" style = "display: none;"> {{silver.value}}</h5>
+				<h5> Bronze: {{bronze.value}}</h5> <h5 class = "bronze" style = "display: none;"> {{bronze.value}}</h5>
+				<h5> Total: {{gold.value + silver.value + bronze.value}}</h5> <h5 class = "total" style = "display: none;"> {{gold.value + silver.value + bronze.value}}</h5>
+				<h5 style = "display: none;" class = "continent" > {{c['continent']}} </h5>
+			</div>
+		</a>
+	</div>
+	{% endfor%}
+	<!-- no results -->               
+    <div data-jplist-control="no-results" data-group="group1" data-name="no-results">No Results Found</div>
+</div>
+
+<br><br>
+
+<!-- jplist plugin -->
+<script type = "text/javascript" src="static/js/jplist.min.js"></script>
+<script> jplist.init({deepLinking: true});</script>
+
 <nav class="navbar navbar-inverse navbar-fixed-top navbar-expand-lg justify-content-between">
   	<div class="container-fluid">
   		<div class="navbar-header">
@@ -56,11 +214,6 @@
       </ul>
     </div>
   </nav>
-</body>
-
-<body>
-
 
 </body>
-
 </html>

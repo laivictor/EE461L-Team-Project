@@ -1,7 +1,7 @@
 from github import Github
 import json
-
-ACCESS_TOKEN = '398bdaefd7631962200e6d83872d2800fc4c4e96'
+from config import ACCESS_TOKEN
+import unittest
 
 g = Github(ACCESS_TOKEN)
 
@@ -16,6 +16,7 @@ total_issues = 0
 data = {}
 commits = {}
 issues = {}
+
 
 for c in collabs:
 	data[c.login] = {}
@@ -41,10 +42,32 @@ data['total_commits'] = total_commits
 data['total_issues'] = total_issues
 
 
-for key in data:
-	print(key)
-
 with open('about.json', 'w') as f:
 	json.dump(data, f,  indent = 2)
+
+
+
+
+#unit tests for stats module
+class TestingStats(unittest.TestCase):
+
+	def test(self):
+
+		test_comm = 0
+		test_iss = 0
+
+		for c in collabs:
+			test_comm = test_comm + data[c.login]['commits']
+			test_iss = test_iss + data[c.login]['issues']
+			
+
+		self.assertEqual(data['total_commits'], test_comm)
+		self.assertEqual(data['total_issues'], test_iss)
+
+
+
+if __name__ == "__main__":
+	unittest.main()
+
 
 

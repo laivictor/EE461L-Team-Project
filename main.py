@@ -1,6 +1,7 @@
 from flask import Flask, render_template, request, Markup
 import json
 from json2html import *
+import countrydb
 
 app = Flask(__name__)
 app.jinja_env.add_extension('jinja2.ext.loopcontrols')
@@ -15,35 +16,45 @@ def home():
     return render_template(
             'home.html', stats = stats, obj = stats_o)
 
-@app.route('/countries')
-def countries():
-    with open('countries.json') as json_file:
-        countries = json.load(json_file)
-    countries = sorted(countries, key = lambda i: i['country'])
-    names = [i['country'] for i in countries]
-    imgs = [i['img'] for i in countries]
-    num = len(names)
-    return render_template(
-            'countries.html', names = names, imgs = imgs, num = num)
-
-@app.route('/countries/<string:page_name>/')
-def open_country(page_name):
-    with open('countries.json') as json_file:
-        countries = json.load(json_file)
-    tb = [i for i in countries if i['country']==page_name][0]
-    del tb['img']
-    table = json2html.convert(json = tb) #,table_attributes="class=\"datatable\""
-    return render_template('countries_template.html', table = table)
-
-
 @app.route('/host-cities')
-def venues():
-
+def index():
     data = None
     with open("host-cities/venues.json") as f:
         data = json.load(f)
     obj = json.dumps(data, indent=4, sort_keys=True)
-    print(type(obj))
+    new_obj = {}
+    count = 0
+
+    keys = data.keys()
+    print(keys)
+
+    print(type(data))
+    print(type(data['1980Summer']['year']))
+    return render_template('host-cities.html', obj=data)
+
+@app.route('/countries')
+def countries():
+    allcountries = countrydb.get_all_countries()
+    allcountries = sorted(allcountries, key = lambda i: i['country'])
+    return render_template(
+            'countries.html', allcountries = allcountries)
+
+@app.route('/countries/<string:page_name>/')
+def open_country(page_name):
+    countries = countrydb.get_all_countries()
+    tb = [i for i in countries if i['country']==page_name][0]
+    tb = [{k: v for k, v in d.items() if k !='ranker'} for d in tb['data']]
+    for i in tb:
+        i.update({"games" : '<a href="/host-cities/select?game=' + i["games"].replace(' ', '') + '">' + i["games"] + '</a>'})    
+    return render_template('countries_template.html', table = tb, country = page_name)
+    
+@app.route('/host-cities')
+def venues():
+    data = None
+    with open("host-cities/venues.json") as f:
+        data = json.load(f)
+    obj = json.dumps(data, indent=4, sort_keys=True)
+    
     return render_template(
             'host-cities.html', obj=data)
 
@@ -79,7 +90,7 @@ def open_sport(page_name):
     tb = [i for i in sport if i['name']==page_name][0]
     name = tb['name']
     img = '../../static/' + tb['img']
-    banner = tb['banner']
+    banner = '../../static/' + tb['banner']
     events = tb['events']
     return render_template(
             'sports/sports_template.html', name = name, img = img, banner = banner, events = events)

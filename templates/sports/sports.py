@@ -21,12 +21,6 @@ for x in f:
   x = x.rstrip("\n")
   events.append(x)
 f.close()
-banners = []
-f = open("banners.json", "r")
-for x in f:
-  x = x.rstrip("\n")
-  banners.append(x)
-f.close()
 index = 0
 for x in s:
   name = x.replace('-',' ').split()
@@ -39,7 +33,7 @@ for x in s:
   st_list.append('{"name":"' + name)
   st_list.append('","ref":"' + x)
   st_list.append('","img":"imgs/' + x + '.png')
-  st_list.append('","banner":"' + banners[index])
+  st_list.append('","banner": "imgs/resizedbanners/resize' + name.replace(' ','-') + '-banner.jpg')
   st_list.append('","events":"' + events[index])
   st_list.append('"},')
   st = ''.join(st_list)
