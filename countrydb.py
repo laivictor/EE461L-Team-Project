@@ -1,7 +1,7 @@
 import pymongo
 import json
 from pymongo import MongoClient
-import pycountry_convert as pc
+#import pycountry_convert as pc
 
 #app.config['MONGO_DBNAME'] = 'restdb'
 #app.config['MONGO_URI'] = 'mongodb+srv://chrisacosta:countrydb@countries-ob9ek.gcp.mongodb.net/test?retryWrites=true&w=majority'
@@ -13,7 +13,7 @@ import pycountry_convert as pc
 countryClient = MongoClient("mongodb+srv://chrisacosta:countrydb@countries-ob9ek.gcp.mongodb.net/test?retryWrites=true&w=majority")
 countries_db = countryClient.countries_db
 countries = countries_db.countries
-
+cities = countries_db.host_cities
 '''
 init = False
 def create_db():
@@ -57,3 +57,17 @@ def add_continents(allcountries):
         c.update({"continent" : co})
     return allcountries
 '''
+
+'''
+def create_cities_table():
+    cities.drop()#clears table
+    with open("host-cities/venues.json") as json_f:
+        data = json.load(json_f)
+    cities.insert_one(data)
+    return
+'''
+
+def get_all_host_cities():
+    data = cities.find_one()
+    return data
+

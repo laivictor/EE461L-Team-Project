@@ -16,22 +16,6 @@ def home():
     return render_template(
             'home.html', stats = stats, obj = stats_o)
 
-@app.route('/host-cities')
-def index():
-    data = None
-    with open("host-cities/venues.json") as f:
-        data = json.load(f)
-    obj = json.dumps(data, indent=4, sort_keys=True)
-    new_obj = {}
-    count = 0
-
-    keys = data.keys()
-    print(keys)
-
-    print(type(data))
-    print(type(data['1980Summer']['year']))
-    return render_template('host-cities.html', obj=data)
-
 @app.route('/countries')
 def countries():
     allcountries = countrydb.get_all_countries()
@@ -50,21 +34,16 @@ def open_country(page_name):
     
 @app.route('/host-cities')
 def venues():
-    data = None
-    with open("host-cities/venues.json") as f:
-        data = json.load(f)
-    obj = json.dumps(data, indent=4, sort_keys=True)
-    
+    data = countrydb.get_all_host_cities()
+    del data["_id"] #delete mongoid from this
     return render_template(
             'host-cities.html', obj=data)
 
 @app.route('/host-cities/select')
 def select():
     key= request.args.get('game')#yearseason
-    data = None
-    with open("host-cities/venues.json") as f:
-        data = json.load(f)
-        
+    data = countrydb.get_all_host_cities()
+    del data["_id"] #delete mongoid from this
     obj = json.dumps(data[key],indent=4, sort_keys=True)
     obj = json.loads(obj)
 
