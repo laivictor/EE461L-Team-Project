@@ -6,6 +6,8 @@ import countrydb
 app = Flask(__name__)
 app.jinja_env.add_extension('jinja2.ext.loopcontrols')
 
+
+
 #to add more pages create more of these functions with /custom-url
 @app.route('/')
 def home():
@@ -42,11 +44,14 @@ def countries():
 @app.route('/countries/<string:page_name>/')
 def open_country(page_name):
     countries = countrydb.get_all_countries()
+
+
     tb = [i for i in countries if i['country']==page_name][0]
+    img = tb['img']
     tb = [{k: v for k, v in d.items() if k !='ranker'} for d in tb['data']]
     for i in tb:
         i.update({"games" : '<a href="/host-cities/select?game=' + i["games"].replace(' ', '') + '">' + i["games"] + '</a>'})    
-    return render_template('countries_template.html', table = tb, country = page_name)
+    return render_template('countries_template.html', table = tb, country = page_name, img = img)
     
 @app.route('/host-cities')
 def venues():
