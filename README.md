@@ -10,17 +10,17 @@
 **Link to website**: https://olympics-269900.appspot.com <br/>
 
 **Estimated Completion Time**: <br/>
-- Victor Lai: 10 hrs<br/>
-- Manuel Avalos: 12 hrs<br/> 
-- David Lok: 12 hrs<br/>
-- Nimay Kumar: 10 hrs<br/>
-- Eduardo Saul Ruiz: 10 hrs<br/>
-- Christopher Acosta: 10 hrs <br/>
+- Victor Lai: 16 hrs<br/>
+- Manuel Avalos: 15 hrs<br/> 
+- David Lok: 15 hrs<br/>
+- Nimay Kumar: 16 hrs<br/>
+- Eduardo Saul Ruiz: 13 hrs<br/>
+- Christopher Acosta: 16 hrs <br/>
 
 **Actual Completion Time**: <br/>
-- Victor Lai: 9 hrs<br/>
-- Manuel Avalos: 11 hrs <br/> 
-- David Lok: 11 hrs<br/>
-- Nimay Kumar: 10 hrs<br/>
-- Eduardo Saul Ruiz: 10 hrs<br/>
-- Christopher Acosta: 10 hrs <br/>
+- Victor Lai: 16 hrs<br/>
+- Manuel Avalos: 16 hrs <br/> 
+- David Lok: 17 hrs<br/>
+- Nimay Kumar: 17 hrs<br/>
+- Eduardo Saul Ruiz: 13 hrs<br/>
+- Christopher Acosta: 17 hrs <br/>
