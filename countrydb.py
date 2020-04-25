@@ -3,17 +3,24 @@ import json
 from pymongo import MongoClient
 #import pycountry_convert as pc
 
-#app.config['MONGO_DBNAME'] = 'restdb'
-#app.config['MONGO_URI'] = 'mongodb+srv://chrisacosta:countrydb@countries-ob9ek.gcp.mongodb.net/test?retryWrites=true&w=majority'
-#mongo = PyMongo(app)
-#mongo2 = PyMongo(app, uri="mongodb://localhost:27017/databaseTwo")
-#db = mongo.db
-#col = db.collection
+'''
+app.config['MONGO_DBNAME'] = 'restdb'
+app.config['MONGO_URI'] = 'mongodb+srv://chrisacosta:countrydb@countries-ob9ek.gcp.mongodb.net/test?retryWrites=true&w=majority'
+mongo = PyMongo(app)
+mongo2 = PyMongo(app, uri="mongodb://localhost:27017/databaseTwo")
+db = mongo.db
+col = db.collection
+'''
 
 countryClient = MongoClient("mongodb+srv://chrisacosta:countrydb@countries-ob9ek.gcp.mongodb.net/test?retryWrites=true&w=majority")
 countries_db = countryClient.countries_db
 countries = countries_db.countries
 cities = countries_db.host_cities
+
+def get_all_countries():
+    #create_db()
+    return countries.find()
+
 '''
 init = False
 def create_db():
@@ -27,9 +34,6 @@ def create_db():
     countries.insert(foo)
     init = True
 '''
-def get_all_countries():
-    #create_db()
-    return countries.find()
 
 '''
 def add_continents(allcountries):
