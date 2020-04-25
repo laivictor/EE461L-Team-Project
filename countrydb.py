@@ -16,6 +16,7 @@ countryClient = MongoClient("mongodb+srv://chrisacosta:countrydb@countries-ob9ek
 countries_db = countryClient.countries_db
 countries = countries_db.countries
 cities = countries_db.host_cities
+sports = countries_db.sports
 
 def get_all_countries():
     #create_db()
@@ -75,3 +76,20 @@ def get_all_host_cities():
     data = cities.find_one()
     return data
 
+
+def create_sports_table():
+    sports.drop()#clears table
+    with open('templates/sports/sport.json') as sportfile:
+        sport = json.load(sportfile)
+    sportdict = {"sport":sport}
+    sports.insert_one(sportdict)
+    return
+
+
+def get_sport():
+    data = sports.find_one()
+    return data["sport"]
+
+if __name__=="__main__":
+    #create_sports_table()
+    print(get_sport())
