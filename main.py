@@ -2,7 +2,6 @@ from flask import Flask, render_template, request, Markup
 import json, operator
 from json2html import *
 import countrydb
-import pandas as pd
 
 app = Flask(__name__)
 app.jinja_env.add_extension('jinja2.ext.loopcontrols')
