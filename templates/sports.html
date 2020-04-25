@@ -22,9 +22,13 @@ th {font-size:60px}
 <br>
 <br>
 <div style = "text-align: center;">
+<h1> Jump to </h1>
+<a href = "#summer">Summer Sports</a>
+<a href = "#winter">Winter Sports</a>
+<a href = "#historical">Historical Sports</a>
 <table align = "center">
 <tr>
-    <th colspan="6">Summer Sports</th>
+    <th colspan="6" id ="summer">Summer Sports</th>
 </tr>
 {% for i in range(0, 47) %}
     {% if (i) is divisibleby 6 %}
@@ -39,12 +43,12 @@ th {font-size:60px}
     {% endif %}
 {% endfor %}
 <tr>
-    <th colspan="6">Winter Sports</th>
+    <th colspan="6" id ="winter">Winter Sports</th>
 </tr>
 {% for i in range(0, num-47) %}
     {% if i+47 == 62 %}
     <tr>
-	<th colspan="6">Historical</th>
+	<th colspan="6" id = "historical">Historical Sports</th>
     </tr>
     {% endif %}
     {% if (i) is divisibleby 6 %}
@@ -59,6 +63,10 @@ th {font-size:60px}
     {% endif %}
 {% endfor %}
 </table>
+<h1> Jump to </h1>
+<a href = "#summer">Summer Sports</a>
+<a href = "#winter">Winter Sports</a>
+<a href = "#historical">Historical Sports</a>
 </div>
 
 <nav class="navbar navbar-inverse navbar-fixed-top navbar-expand-lg justify-content-between">
