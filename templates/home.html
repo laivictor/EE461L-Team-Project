@@ -14,6 +14,21 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
 
+    	  <!-- Font Awesome -->
+	  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css">
+	  <!-- Google Fonts Roboto -->
+	  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap">
+	
+    <link rel="icon" href="../static/img/olympic.ico" type="image/x-icon">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script> -->
+
+    <link rel="stylesheet" href="../static/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../static/css/mdb.min.css">
+
+    <link href="../static/css/addons/datatables.min.css" rel="stylesheet">
+    <!-- Your custom styles (optional) -->
+    <link rel="stylesheet" href="../static/css/styletemp.css">  
   </head>
 
   <!-- <link type="text/css" rel="stylesheet" href="/static/index.css" /> -->
@@ -23,6 +38,11 @@
     .w-50{
       margin: 0 auto;
     }
+    #page{
+      margin: 0 auto;
+      width: 60%
+    }
+    
     #olympic-logo {
       display: block;
       width: 50%;
@@ -55,7 +75,7 @@
   <body>
 
 
-     <nav class="navbar navbar-inverse navbar-fixed-top navbar-expand-lg justify-content-between">
+  <nav class="navbar navbar-inverse navbar-fixed-top navbar-expand-lg justify-content-between">
     <div class="container-fluid">
       <div class="navbar-header">
         <a class="navbar-brand" href="/"> The Olympics </a>
@@ -68,6 +88,7 @@
     </div>
   </nav>
 
+  <div id="page">
    <div id="demo" class="carousel slide" data-ride="carousel">
 
   <!-- Indicators -->
@@ -221,7 +242,7 @@
       </div>
     </div>
   </div>
-</div>
+
 
 <div class="bio-container">
   <h2 style="margin-left: 10px;">Victor Lai</h2>
@@ -298,12 +319,12 @@
 
 
 
-<div id="repo">
+  <div id="repo">
   <p>Link to our repository below</p>
   <a href="https://github.com/laivictor/EE461L-Team-Project">
     <img id="github-logo" src="https://image.flaticon.com/icons/svg/25/25231.svg" alt="github link">
   </a>
-</div>
+  </div>
 
   <h4>Statistics</h4>
   <div> {{stats | safe}} </div> 
@@ -313,8 +334,8 @@
 
   
 
-   
-    </body>
+</div>   
+</body>
    
   
 
