@@ -69,9 +69,8 @@ def select():
     del data["_id"] #delete mongoid from this
     obj = json.dumps(data[key],indent=4, sort_keys=True)
     obj = json.loads(obj)
-    country = obj[country].split()
     return render_template(
-            'host-template.html', obj=obj, medals=Markup(obj["medal_table"]), country=country)
+            'host-template.html', obj=obj, medals=Markup(obj["medal_table"]))
 
 
 @app.route('/sports')
