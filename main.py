@@ -40,6 +40,25 @@ def open_country(page_name):
 def venues():
     data = countrydb.get_all_host_cities()
     del data["_id"] #delete mongoid from this
+    for key in data.keys():#normalize some countries with different names than link
+        country = data[key]["country"]
+        if "China" in country:
+            country = "China"
+        elif "Russia" in country:
+            country = "Russia"
+        elif "United States" in country:
+            country = "United States"
+        elif "Republic of Korea" in country:
+            country="South Korea"
+        elif "Great Britain" in country:
+            country = "United Kingdom"
+        elif "Australia, Sweden" in country:
+            data[key]["country"] = "<a href='/countries/Australia'>Australia</a>, <a href='/countries/Sweden'>Sweden</a>"
+            continue
+
+        countrylink = "<a href='/countries/"+ country.replace(" ", "%20")+"'>" + data[key]["country"] +"</a>"
+        data[key]["country"] = countrylink
+    
     return render_template(
             'host-cities.html', obj=data)
 
@@ -50,9 +69,9 @@ def select():
     del data["_id"] #delete mongoid from this
     obj = json.dumps(data[key],indent=4, sort_keys=True)
     obj = json.loads(obj)
-
+    country = obj[country].split()
     return render_template(
-            'host-template.html', obj=obj, medals=Markup(obj["medal_table"]))
+            'host-template.html', obj=obj, medals=Markup(obj["medal_table"]), country=country)
 
 
 @app.route('/sports')
