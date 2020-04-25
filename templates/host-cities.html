@@ -59,7 +59,8 @@
 	{% for key in obj.keys(): %}
 	
 			<tr>
-				<td><a href="host-cities/select?game={{key}}"><img src="{{'../static/host-cities/logos/' + obj[key]['logo']}}" alt="{{'../static/host-cities/logos/' + obj[key]['logo']}}" /> </a></td>
+        <td><a href="host-cities/select?game={{key}}">
+          <img src="{{'../static/host-cities/logos/' + obj[key]['logo']}}" alt="{{'../static/host-cities/logos/' + obj[key]['logo']}}" /> </a></td>
 				<td>{{obj[key]['year']|int     }}</td>
 				<td>{{obj[key]['season']   }}</td>
 				<td><a href= "{{'/host-cities/select?game=' + key}}">{{obj[key]['city']}}</a> </td>
@@ -98,7 +99,9 @@
 
   <script>
     $(document).ready(function () {
-      $('#myTable').DataTable();
+      $('#myTable').DataTable({
+        "order": [[1, "desc"]]
+      });
       $('.dataTables_length').addClass('bs-select');
       });
   </script>

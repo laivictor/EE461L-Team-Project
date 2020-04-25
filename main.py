@@ -1,7 +1,8 @@
 from flask import Flask, render_template, request, Markup
-import json
+import json, operator
 from json2html import *
 import countrydb
+import pandas as pd
 
 app = Flask(__name__)
 app.jinja_env.add_extension('jinja2.ext.loopcontrols')
@@ -48,21 +49,12 @@ def open_country(page_name):
         i.update({"games" : '<a href="/host-cities/select?game=' + i["games"].replace(' ', '') + '">' + i["games"] + '</a>'})    
     return render_template('countries_template.html', table = tb, country = page_name)
     
-@app.route('/host-cities')
-def venues():
-    data = None
-    with open("host-cities/venues.json") as f:
-        data = json.load(f)
-    obj = json.dumps(data, indent=4, sort_keys=True)
-    
-    return render_template(
-            'host-cities.html', obj=data)
-
 @app.route('/host-cities/select')
 def select():
     key= request.args.get('game')#yearseason
     data = None
-    with open("host-cities/venues.json") as f:
+    # with open("host-cities/venues.json") as f:
+    with open("venues.json") as f:
         data = json.load(f)
         
     obj = json.dumps(data[key],indent=4, sort_keys=True)

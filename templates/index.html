@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <title>Material Design for Bootstrap</title>
+  <!-- MDB icon -->
+  <!-- <link rel="icon" href="static/img/mdb-favicon.ico" type="image/x-icon"> -->
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css">
+  <!-- Google Fonts Roboto -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap">
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="static/css/bootstrap.min.css">
+  <!-- Material Design Bootstrap -->
+  <link rel="stylesheet" href="static/css/mdb.min.css">
+  <!-- MDBootstrap Datatables  -->
+  <link href="static/css/addons/datatables.min.css" rel="stylesheet">
+  <!-- Your custom styles (optional) -->
+  <link rel="stylesheet" href="static/css/styletemp.css">
+  <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+	<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet"/> -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+	<!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script> -->
+</head>
+<body style="padding-top:100px; width:70%; margin: 0 auto">
+	<nav class="navbar navbar-inverse navbar-fixed-top navbar-expand-lg justify-content-between">
+  	<div class="container-fluid">
+  		<div class="navbar-header">
+  			<a class="navbar-brand" href="/"> The Olympics </a>
+  		</div>
+	    <ul class="nav navbar-nav">
+	    	<li><a href="/countries"> Countries </a></li>
+		<li><a href="/host-cities"> Host Cities </a></li>
+    <li><a href="/sports"> Sports </a></li>
+      </ul>
+    </div>
+  </nav>
+
+	<h1>Host Cities</h1>
+
+
+	<table id="myTable" class="table">
+		<thead>
+			<tr>
+				<th class="th-sm"></th>
+				<th class="th-sm">Year</th>
+				<th class="th-sm">Season</th>
+				<th class="th-sm">Host City</th>
+				<th class="th-sm">Host Country</th>
+				<th class="th-sm">Countries Participated</th>
+				<th class="th-sm">Athletes Participated</th>
+				<th class="th-sm"># of Events</th>
+			</tr>
+		</thead>
+		<tbody>
+
+	{% for key in obj.keys(): %}
+	
+			<tr>
+				<td><a href="host-cities/select?game={{key}}"><img src="{{'../static/host-cities/logos/' + obj[key]['logo']}}" alt="{{'../static/host-cities/logos/' + obj[key]['logo']}}" /> </a></td>
+				<td>{{obj[key]['year']|int     }}</td>
+				<td>{{obj[key]['season']   }}</td>
+				<td><a href= "{{'/host-cities/select?game=' + key}}">{{obj[key]['city']}}</a> </td>
+				<td>{{obj[key]['country']  }}</td>
+				<td>{{obj[key]['countries']|int }}</td>
+				<td>{{obj[key]['athletes']|int }}</td>
+				<td>{{obj[key]['events']|int   }}</td>
+			</tr>
+  {% endfor %}
+    </tbody>
+
+	</table>
+
+  <!-- Start your project here-->  
+  <!-- <div style="height: 100vh">
+    <div class="flex-center flex-column">
+      <h1 class="text-hide animated fadeIn mb-4" style="background-image: url('https://mdbootstrap.com/img/logo/mdb-transparent-250px.png'); width: 250px; height: 90px;">MDBootstrap</h1>
+      <h5 class="animated fadeIn mb-3">Thank you for using our product. We're glad you're with us.</h5>
+      <p class="animated fadeIn text-muted">MDB Team</p>
+    </div>
+  </div> -->
+  <!-- End your project here-->
+
+  <!-- jQuery -->
+  <script type="text/javascript" src="static/js/jquery.min.js"></script>
+  <!-- Bootstrap tooltips -->
+  <script type="text/javascript" src="static/js/popper.min.js"></script>
+  <!-- Bootstrap core JavaScript -->
+  <script type="text/javascript" src="static/js/bootstrap.min.js"></script>
+  <!-- MDB core JavaScript -->
+  <script type="text/javascript" src="static/js/mdb.min.js"></script>
+  <!-- MDBootstrap Datatables  -->
+  <script type="text/javascript" src="static/js/addons/datatables.min.js"></script>
+  <!-- Your custom scripts (optional) -->
+  <script type="text/javascript"></script>
+
+  <script>
+    $(document).ready(function () {
+      $('#myTable').DataTable();
+      $('.dataTables_length').addClass('bs-select');
+      });
+  </script>
+    <!-- <script>
+      var obj = jQuery.extend(true, {}, data);
+      $.each(data, function(key, value) {
+      $.each(value, function(k, v) {
+        // if the value can be parsed to int, it will be OR the value remains untouched
+        obj[key][k] = +v || obj[key][k];
+      });
+      });
+  
+      document.write("<pre>" + JSON.stringify(obj, null, 3) + "</pre>");
+    </script>
+   -->
+</body>
+</html>

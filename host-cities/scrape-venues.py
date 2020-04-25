@@ -48,8 +48,7 @@ def scrape_hosts_info(link):
     season = link2[1]
     
     url = "https://olympic.org" + link
-    file_name = "responses/" + link.strip("/") + ".html"
-
+    file_name = "host-cities/responses/" + link.strip("/") + ".html"
     if(not path.exists(file_name)):
         get_response(url, file_name)
 
@@ -127,7 +126,7 @@ def medal_table(season, year):
         return None
     print(year)
     url = "https://www.topendsports.com/events/" + season.lower() + "/medal-tally/" + str(year) + ".htm"
-    filename = "responses/medal_tables/"+str(year)+"-"+season +".html"
+    filename = "host-cities/responses/medal_tables/"+str(year)+"-"+season +".html"
 
     if(not path.exists(filename)):
         get_response(url, filename)
@@ -136,9 +135,25 @@ def medal_table(season, year):
         soup = BeautifulSoup(f.read(), 'html.parser')
 
     medals = soup.find('table', class_='list')
-    print(medals)
+    medals['id'] = 'medalTable'
+    for thtag in medals.find_all('th'):
+        thtag['class'] = 'th-sm'
+    rank = medals.find('th')
+    if rank.text != "Ranking":
+        rank.string = "Ranking"
+    new_tag = soup.new_tag('thead')
+    trow = medals.find('tr')
+    trow.wrap(new_tag)
+    for tr in medals.find_all('tr'):
+        tr['class'] = 'inBody'
+    tr_one = medals.find('tr')
+    del tr_one['class']
+    
+    # print(medals)
+    print(type(medals))
     print(type(str(medals)))
     medals = str(medals).replace("list", "table")
+    
     return medals
 
 def make_dictionary(array_from_scrape):
@@ -189,7 +204,11 @@ if __name__ == "__main__":
             data[str(dictionary['year'])+dictionary['season']] = dictionary
 
         with open('venues.json', 'w') as fp:
+            fp.seek(0)  # rewind
             json.dump(data, fp)
+            fp.truncate()
+    elif sys.argv[1] == 'medal':
+        print(medal_table('Winter', 2010))
     else:
         print("Must use 'scrape' or 'set' argument in scrape-venues.py")
     
