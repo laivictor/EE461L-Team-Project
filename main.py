@@ -53,10 +53,10 @@ def venues():
         elif "Great Britain" in country:
             country = "United Kingdom"
         elif "Australia, Sweden" in country:
-            data[key]["country"] = "<a href='/countries/Australia'>Australia</a>, <a href='/countries/Sweden'>Sweden</a>"
+            data[key]["country"] = "<a class='btn-link' href='/countries/Australia'>Australia</a>, <a class='btn-link' href='/countries/Sweden'>Sweden</a>"
             continue
 
-        countrylink = "<a href='/countries/"+ country.replace(" ", "%20")+"'>" + data[key]["country"] +"</a>"
+        countrylink = "<a class='btn-link' href='/countries/"+ country.replace(" ", "%20")+"'>" + data[key]["country"] +"</a>"
         data[key]["country"] = countrylink
     
     return render_template(

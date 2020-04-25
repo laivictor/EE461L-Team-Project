@@ -64,7 +64,7 @@
 				<td>{{obj[key]['year']|int     }}</td>
 				<td>{{obj[key]['season']   }}</td>
 				<td><a href= "{{'/host-cities/select?game=' + key}}">{{obj[key]['city']}}</a> </td>
-				<td>{{obj[key]['country']  }}</td>
+				<td>{{obj[key]['country']|safe  }}</td>
 				<td>{{obj[key]['countries']|int }}</td>
 				<td>{{obj[key]['athletes']|int }}</td>
 				<td>{{obj[key]['events']|int   }}</td>
