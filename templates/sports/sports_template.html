@@ -25,13 +25,13 @@
   </nav>
 <div class="bg-image">
 <picture>
-<img src="{{banner}}" alt="{{name}}" class="lazyload"></picture>
+<img src="{{obj['banner']}}" alt="{{obj['name']}}" class="lazyload"></picture>
 </div>
-<h1 style="margin-left: 20px">{{name}}</h1>
-<img style="margin-left: 20px" src={{img}}/>
+<h1 style="margin-left: 20px">{{obj['name']}}</h1>
+<img style="margin-left: 20px" src="{{obj['img']}}"/>
 
 <table align = "center">
-{% set eventarray = events.split("|") %}
+{% set eventarray = obj['events'].split("|") %}
 {% for event in eventarray %}
     <tr>
     <td>
