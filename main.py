@@ -1,17 +1,17 @@
 from flask import Flask, render_template, request, Markup
 import json, operator
 from json2html import *
-import countrydb
+from design_patterns import Countries
+from design_patterns import HostCities
+from design_patterns import Module
 
 app = Flask(__name__)
 app.jinja_env.add_extension('jinja2.ext.loopcontrols')
 
 
-
 #to add more pages create more of these functions with /custom-url
 @app.route('/')
 def home():
-
     with open('about.json', 'r') as about_file:
         stats_o = json.load(about_file)
         stats = json2html.convert(json = stats_o)
@@ -20,14 +20,16 @@ def home():
 
 @app.route('/countries')
 def countries():
-    allcountries = countrydb.get_all_countries()
+    m = Module(Countries.getInstance())
+    allcountries = m.data()
     allcountries = sorted(allcountries, key = lambda i: i['country'])
     return render_template(
             'countries.html', allcountries = allcountries)
 
 @app.route('/countries/<string:page_name>/')
 def open_country(page_name):
-    countries = countrydb.get_all_countries()
+    m = Module(Countries.getInstance())
+    countries = m.data()
     tb = [i for i in countries if i['country']==page_name][0]
     img = tb['img']
     tb = [{k: v for k, v in d.items() if k !='ranker'} for d in tb['data']]
@@ -38,7 +40,9 @@ def open_country(page_name):
     
 @app.route('/host-cities')
 def venues():
-    data = countrydb.get_all_host_cities()
+    m = Module(HostCities.getInstance())
+    data = m.data()
+    #data = countrydb.get_all_host_cities()
     del data["_id"] #delete mongoid from this
     for key in data.keys():#normalize some countries with different names than link
         country = data[key]["country"]
@@ -65,7 +69,9 @@ def venues():
 @app.route('/host-cities/select')
 def select():
     key= request.args.get('game')#yearseason
-    data = countrydb.get_all_host_cities()
+    m = Module(HostCities.getInstance())
+    data = m.data()
+    #data = countrydb.get_all_host_cities()
     del data["_id"] #delete mongoid from this
     obj = json.dumps(data[key],indent=4, sort_keys=True)
     obj = json.loads(obj)
