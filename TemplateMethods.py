@@ -1,6 +1,7 @@
 import countrydb
 from flask import Flask, render_template, request, Markup
-import json
+import json, urllib
+from urllib import *
 from json2html import *
 from abc import ABC, abstractmethod
 
@@ -21,7 +22,22 @@ class PageTemplate(ABC):
 
     def getPage(self):
         """this is the same for every subclass"""
-        return render_template(self.template_name, obj=self.formatData())
+        
+        nav = """<nav class='navbar navbar-inverse navbar-fixed-top navbar-expand-lg justify-content-between'>
+                <div class='container-fluid'>
+                <div class='navbar-header'>
+                    <a class='navbar-brand' href='/'> The Olympics </a>
+                </div>
+                <ul class='nav navbar-nav'>
+                    <li><a href='/countries'> Countries </a></li>
+                <li><a href='/host-cities'> Host Cities </a></li>
+                <li><a href='/sports'> Sports </a></li>
+                </ul>
+                </div>
+            </nav>"""
+
+
+        return render_template(self.template_name, obj=self.formatData(), nav=nav)
         
 
 class HostCityTemplate(PageTemplate):
