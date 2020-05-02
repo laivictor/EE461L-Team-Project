@@ -1,4 +1,4 @@
-import countrydb
+from mongodb import Database
 from flask import Flask, render_template, request, Markup
 import json, urllib
 from urllib import *
@@ -45,7 +45,7 @@ class HostCityTemplate(PageTemplate):
         self.template_name= "host-cities.html"
 
     def formatData(self):
-        data = countrydb.get_all_host_cities()
+        data = Database.getInstance().getHostCities()
         del data["_id"] #delete mongoid from this
         for key in data.keys():#normalize some countries with different names than link
             country = data[key]["country"]
@@ -74,7 +74,7 @@ class HostCitySelectTemplate(PageTemplate):
 
     def formatData(self):
         key= self.args['game']#yearseason
-        data = countrydb.get_all_host_cities()
+        data = Database.getInstance().getHostCities()
         del data["_id"] #delete mongoid from this
         obj = json.dumps(data[key],indent=4, sort_keys=True)
         obj = json.loads(obj)
@@ -97,7 +97,7 @@ class SportsTemplate(PageTemplate):
         self.template_name = "sports.html"
 
     def formatData(self):
-        sport = countrydb.get_sport()
+        sport = Database.getInstance().getSports()
         names = [i['name'] for i in sport]
         refs = [i['ref'] for i in sport]
         imgs = ['../static/' + i['img'] for i in sport]
@@ -126,7 +126,7 @@ class CountryTemplate(PageTemplate):
         self.template_name = "countries.html"
     
     def formatData(self):
-        allcountries = countrydb.get_all_countries()
+        allcountries = Database.getInstance().getCountries()
         allcountries = sorted(allcountries, key = lambda i: i['country'])
         return {"allcountries":allcountries}
 
@@ -136,7 +136,7 @@ class OpenCountryTemplate(PageTemplate):
         self.args = args
 
     def formatData(self):
-        countries = countrydb.get_all_countries()
+        countries = Database.getInstance().getCountries()
         tb = [i for i in countries if i['country']==self.args['page_name']][0]
         img = tb['img']
         tb = [{k: v for k, v in d.items() if k !='ranker'} for d in tb['data']]
