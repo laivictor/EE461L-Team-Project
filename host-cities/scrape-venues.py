@@ -157,6 +157,8 @@ def medal_table(season, year):
                     tdtag.string = tdtag.text[1:]
             if index == 1:
                 tdtag['class'] = 'sorting_1'
+                if tdtag.text == 'Great Britain':
+                    tdtag.string = 'United Kingdom'
                 if len(tdtag.text) == 3:
                     if tdtag.text == "CRO":
                         tdtag.string = "HRV"
