@@ -5,6 +5,10 @@ from urllib import *
 from json2html import *
 from abc import ABC, abstractmethod
 
+countries = Database.getInstance().getCountries()
+countrynames = [i['country'] for i in countries]
+print (countrynames)
+
 class PageTemplate(ABC):
 
     def __init__(self, template_name, args):
