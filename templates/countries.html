@@ -86,7 +86,7 @@
       google.charts.setOnLoadCallback(drawRegionsMap);
       function drawRegionsMap() {
 		var medals = [['Country', 'Total Medals']]
-		{% for c in allcountries %}
+		{% for c in obj['allcountries'] %}
 			{% set total = namespace(value=0) %}
 			{% for m in c['data'] %}
 				{% set total.value = total.value +  (m['Gold'] | int) + (m['Silver'] | int) + (m['Bronze'] | int)%}
@@ -172,7 +172,7 @@
 
 <!-- Grid of countries -->
 <div class = "cards" data-jplist-group="group1">
-	{% for c in allcountries %}
+	{% for c in obj['allcountries'] %}
 	<div data-jplist-item>
 		<a href = "/countries/{{c['country']}}">
 			<div class = "card">

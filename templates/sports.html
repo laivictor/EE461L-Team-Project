@@ -63,24 +63,24 @@
 <div class = "gridsports" data-jplist-group="group1">
     {% for i in range(0, 47) %}
     	<div data-jplist-item>
-	    <div class="title">{{names[i]}}</div>
+	    <div class="title">{{obj['names'][i]}}</div>
 	    <h5 style = "display: none;" class = "type" > Summer </h5>
-		<a class="btn btn-danger" href="/sports/{{names[i]}}">
-		<img src = {{imgs[i]}} width=96 height=96>
+		<a class="btn btn-danger" href="/sports/{{obj['names'][i]}}">
+		<img src = "{{obj['imgs'][i]}}" width=96 height=96>
 		</a>
 	</div>
     {% endfor %}
-    {% for i in range(0, num-48) %}
+    {% for i in range(0, obj['num']-48) %}
 	<div data-jplist-item>
-	    <div class="title">{{names[i+47]}}</div>
+	    <div class="title">{{obj['names'][i+47]}}</div>
 	    <h5 style = "display: none;" class = "type" > Winter </h5>
-	<a class="btn btn-primary" href="/sports/{{names[i+47]}}"> <img src = {{imgs[i+47]}} width=96 height=96></a>
+	<a class="btn btn-primary" href="/sports/{{obj['names'][i+47]}}"> <img src = "{{obj['imgs'][i+47]}}" width=96 height=96></a>
 	</div>
     {% endfor %}
 	<div data-jplist-item>
-	    <div class="title">{{names[num-1]}}</div>
+	    <div class="title">{{obj['names'][obj['num']-1]}}</div>
 	    <h5 style = "display: none;" class = "type" > Historical </h5>
-	<a class="btn btn-success" href="/sports/{{names[num-1]}}"> <img src = {{imgs[num-1]}} width=96 height=96></a>
+	<a class="btn btn-success" href="/sports/{{obj['names'][obj['num']-1]}}"> <img src = "{{obj['imgs'][obj['num']-1]}}" width=96 height=96></a>
 	</div>
     <div data-jplist-control="no-results" data-group="group1" data-name="no-results">No Results Found</div>
 </div>

@@ -1,100 +1,46 @@
 from flask import Flask, render_template, request, Markup
 import json, operator
 from json2html import *
-import countrydb
+import countrydb, TemplateMethods
 
 app = Flask(__name__)
 app.jinja_env.add_extension('jinja2.ext.loopcontrols')
 
-
-
 #to add more pages create more of these functions with /custom-url
 @app.route('/')
 def home():
-
-    with open('about.json', 'r') as about_file:
-        stats_o = json.load(about_file)
-        stats = json2html.convert(json = stats_o)
-    return render_template(
-            'home.html', stats = stats, obj = stats_o)
+    home_template = TemplateMethods.HomeTemplate()
+    return home_template.getPage()
 
 @app.route('/countries')
 def countries():
-    allcountries = countrydb.get_all_countries()
-    allcountries = sorted(allcountries, key = lambda i: i['country'])
-    return render_template(
-            'countries.html', allcountries = allcountries)
+    country_template = TemplateMethods.CountryTemplate()
+    return country_template.getPage()
 
 @app.route('/countries/<string:page_name>/')
 def open_country(page_name):
-    countries = countrydb.get_all_countries()
-    tb = [i for i in countries if i['country']==page_name][0]
-    img = tb['img']
-    tb = [{k: v for k, v in d.items() if k !='ranker'} for d in tb['data']]
-    years = [i['games'] for i in tb]
-    for i in tb:
-        i.update({"games" : '<a href="/host-cities/select?game=' + i["games"].replace(' ', '') + '">' + i["games"] + '</a>'})    
-    return render_template('countries_template.html', table = tb, country = page_name, img = img, years = years)
+    open_country_template = TemplateMethods.OpenCountryTemplate({"page_name":page_name})
+    return open_country_template.getPage()
     
 @app.route('/host-cities')
 def venues():
-    data = countrydb.get_all_host_cities()
-    del data["_id"] #delete mongoid from this
-    for key in data.keys():#normalize some countries with different names than link
-        country = data[key]["country"]
-        if "China" in country:
-            country = "China"
-        elif "Russia" in country:
-            country = "Russia"
-        elif "United States" in country:
-            country = "United States"
-        elif "Republic of Korea" in country:
-            country="South Korea"
-        elif "Great Britain" in country:
-            country = "United Kingdom"
-        elif "Australia, Sweden" in country:
-            data[key]["country"] = "<a class='btn-link' href='/countries/Australia'>Australia</a>, <a class='btn-link' href='/countries/Sweden'>Sweden</a>"
-            continue
-
-        countrylink = "<a class='btn-link' href='/countries/"+ country.replace(" ", "%20")+"'>" + data[key]["country"] +"</a>"
-        data[key]["country"] = countrylink
-    
-    return render_template(
-            'host-cities.html', obj=data)
+    host_template = TemplateMethods.HostCityTemplate()
+    return host_template.getPage()
 
 @app.route('/host-cities/select')
 def select():
-    key= request.args.get('game')#yearseason
-    data = countrydb.get_all_host_cities()
-    del data["_id"] #delete mongoid from this
-    obj = json.dumps(data[key],indent=4, sort_keys=True)
-    obj = json.loads(obj)
-    return render_template(
-            'host-template.html', obj=obj, medals=Markup(obj["medal_table"]))
-
+    city_template = TemplateMethods.HostCitySelectTemplate({"game": request.args.get("game")})
+    return city_template.getPage()
 
 @app.route('/sports')
 def sports():
-    with open('templates/sports/sport.json') as sportfile:
-        sport = json.load(sportfile)
-    names = [i['name'] for i in sport]
-    refs = [i['ref'] for i in sport]
-    imgs = ['../static/' + i['img'] for i in sport]
-    num = len(names)
-    return render_template(
-            'sports.html', names = names, refs = refs, imgs = imgs, num = num)
+    sport_template = TemplateMethods.SportsTemplate()
+    return sport_template.getPage()
 
 @app.route('/sports/<string:page_name>/')
 def open_sport(page_name):
-    with open('templates/sports/sport.json') as sportfile:
-        sport = json.load(sportfile)
-    tb = [i for i in sport if i['name']==page_name][0]
-    name = tb['name']
-    img = '../../static/' + tb['img']
-    banner = '../../static/' + tb['banner']
-    events = tb['events']
-    return render_template(
-            'sports/sports_template.html', name = name, img = img, banner = banner, events = events)
+    open_template = TemplateMethods.OpenSportTemplate({"page_name":page_name})
+    return open_template.getPage()
 
 
     
