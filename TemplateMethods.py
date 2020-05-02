@@ -2,20 +2,22 @@ import countrydb
 from flask import Flask, render_template, request, Markup
 import json
 from json2html import *
+from abc import ABC, abstractmethod
 
-class PageTemplate(object):
+class PageTemplate(ABC):
 
     def __init__(self, template_name, args):
         """this can be overrided by sublclasses to avoid passing in template_name parameter every time"""
         self.template_name = template_name
         self.args = args
-        
 
+    @abstractmethod
     def formatData(self):
         """this is abstract, it should be defined by each subclass, gets data from database and formats it to be passed as obj"""
         #manipulate data and return, data will be the parameters passed into the template
         data = None
         return data
+
 
     def getPage(self):
         """this is the same for every subclass"""
