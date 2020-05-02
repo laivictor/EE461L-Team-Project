@@ -3,10 +3,10 @@ import requests
 import urllib.request
 import time
 from bs4 import BeautifulSoup
-
+import pycountry_convert as concon
 import sys
 import os.path
-from os import path
+from os import getcwd, path
 
 def get_response(url, filename):
     #url = 'http://olympic.org/olympic-games'
@@ -48,7 +48,7 @@ def scrape_hosts_info(link):
     season = link2[1]
     
     url = "https://olympic.org" + link
-    file_name = "host-cities/responses/" + link.strip("/") + ".html"
+    file_name = "responses/" + link.strip("/") + ".html"
     if(not path.exists(file_name)):
         get_response(url, file_name)
 
@@ -125,8 +125,9 @@ def medal_table(season, year):
     if(int(year) > 2018):
         return None
     print(year)
+    print(getcwd())
     url = "https://www.topendsports.com/events/" + season.lower() + "/medal-tally/" + str(year) + ".htm"
-    filename = "host-cities/responses/medal_tables/"+str(year)+"-"+season +".html"
+    filename = "responses/medal_tables/"+str(year)+"-"+season +".html"
 
     if(not path.exists(filename)):
         get_response(url, filename)
@@ -148,6 +149,78 @@ def medal_table(season, year):
         tr['class'] = 'inBody'
     tr_one = medals.find('tr')
     del tr_one['class']
+    for trtag in medals.find_all('tr'):
+        index = 0
+        for tdtag in trtag.find_all('td'):
+            if index == 0:
+                if "=" in tdtag.text:
+                    tdtag.string = tdtag.text[1:]
+            if index == 1:
+                tdtag['class'] = 'sorting_1'
+                if len(tdtag.text) == 3:
+                    if tdtag.text == "CRO":
+                        tdtag.string = "HRV"
+                    elif tdtag.text == "SUI":
+                        tdtag.string = "CHE"
+                    elif tdtag.text == "IRI":
+                        tdtag.string = "IRN"
+                    elif tdtag.text == "GRE":
+                        tdtag.string = "GRC"
+                    elif tdtag.text == "DEN":
+                        tdtag.string = "DNK"
+                    elif tdtag.text == "RSA":
+                        tdtag.string = "ZAF"
+                    elif tdtag.text == "SLO":
+                        tdtag.string = "SVN"
+                    elif tdtag.text == "INA":
+                        tdtag.string = "IDN"
+                    elif tdtag.text == "VIE":
+                        tdtag.string = "Vietnam"
+                    elif tdtag.text == "TPE":
+                        tdtag.string = "TWN"
+                    elif tdtag.text == "BAH":
+                        tdtag.string = "BHS"
+                    elif tdtag.text == "IOA":
+                        tdtag.string = "Individual Olympic Athletes"
+                    elif tdtag.text == "FIJ":
+                        tdtag.string = "FJI"
+                    elif tdtag.text == "KOS":
+                        tdtag.string = "Kosovo"
+                    elif tdtag.text == "PUR":
+                        tdtag.string = "PRI"
+                    elif tdtag.text == "SIN":
+                        tdtag.string = "SGP"
+                    elif tdtag.text == "MAS":
+                        tdtag.string = "MYS"
+                    elif tdtag.text == "ALG":
+                        tdtag.string = "DZA"
+                    elif tdtag.text == "BUL":
+                        tdtag.string = "BGR"
+                    elif tdtag.text == "MGL":
+                        tdtag.string = "MNG"
+                    elif tdtag.text == "GRN":
+                        tdtag.string = "GRD"
+                    elif tdtag.text == "NIG":
+                        tdtag.string = "NER"
+                    elif tdtag.text == "PHI":
+                        tdtag.string = "PHL"
+                    elif tdtag.text == "NGR":
+                        tdtag.string = "NGA"
+                    elif tdtag.text == "POR":
+                        tdtag.string = "PRT"
+                    elif tdtag.text == "UAE":
+                        tdtag.string = "ARE"
+
+                    if (tdtag.text != "Individual Olympic Athletes") & (tdtag.text != "Kosovo") & (tdtag.text != "Vietnam"):
+                        two = concon.country_alpha3_to_country_alpha2(tdtag.text)
+                        tdtag.string = concon.country_alpha2_to_country_name(two)
+            index = index + 1
+    print(medals.find_all('td', class_="sorting_1"))
+    for countrytag in medals.find_all('td', class_="sorting_1"):
+        c_link = soup.new_tag("a", href='/countries/' + countrytag.text)
+        c_link["class"] = "btn-link"
+        if len(countrytag.text) > 0:
+            countrytag.string.wrap(c_link)
     
     # print(medals)
     print(type(medals))
@@ -208,7 +281,7 @@ if __name__ == "__main__":
             json.dump(data, fp)
             fp.truncate()
     elif sys.argv[1] == 'medal':
-        print(medal_table('Winter', 2010))
+        print(medal_table('Summer', 2016))
     else:
         print("Must use 'scrape' or 'set' argument in scrape-venues.py")
     
