@@ -118,8 +118,34 @@ class OpenSportTemplate(PageTemplate):
         name = tb['name']
         img = '../../static/' + tb['img']
         banner = '../../static/' + tb['banner']
-        events = tb['events']
+        with open('templates/sports/eventnames.json') as eventfile:
+            event = json.load(eventfile)
+        upname = name.upper()
+        if upname == "BASEBALL SOFTBALL":
+            upname = "BASEBALL - SOFTBALL"
+        elif upname == "WRESTLING GRECO ROMAN":
+            upname = "WRESTLING GRECO-ROMAN"
+        elif upname == "EQUESTRIAN DRESSAGE":
+            upname = "EQUESTRIAN / DRESSAGE"
+        tb = [i for i in event if i['sportname'].upper()==upname]
+        events = [i['eventname'].upper() for i in tb]
+        events.sort()
         obj = {"name":name, "img": img, "banner":banner, "events": events}
+        return obj
+
+class OpenEventTemplate(PageTemplate):
+    def __init__(self, args):
+        self.template_name = "sports/event_template.html"
+        self.args = args
+    
+    def formatData(self):
+        with open('templates/sports/eventdata.json') as sportfile:
+            sport = json.load(sportfile)
+        name = self.args['page_name'].upper()
+        tb = [i for i in sport if i['eventname'].upper()==name]
+        tb = sorted(tb, key = lambda i: i['year'], reverse = True)
+        events = [i['html'] for i in tb]
+        obj = {"name":name, "events": events}
         return obj
 
 class CountryTemplate(PageTemplate):

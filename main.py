@@ -42,6 +42,11 @@ def open_sport(page_name):
     open_template = TemplateMethods.OpenSportTemplate({"page_name":page_name})
     return open_template.getPage()
 
+@app.route('/sports/event/<string:page_name>/')
+def open_event(page_name):
+    event_template = TemplateMethods.OpenEventTemplate({"page_name":page_name})
+    return event_template.getPage()
+
 
     
 if __name__ == '__main__':

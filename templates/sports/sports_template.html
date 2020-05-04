@@ -18,29 +18,15 @@
 </div>
 <h1 style="margin-left: 20px">{{obj['name']}}</h1>
 <img style="margin-left: 20px" src="{{obj['img']}}"/>
-
 <table align = "center">
-{% set eventarray = obj['events'].split("|") %}
+{% set eventarray = obj['events'] %}
 {% for event in eventarray %}
     <tr>
     <td>
-    {% if event == "MEN" %}
-        <h2>{{event}}</h2>
-        {% continue %}
-    {% endif %}
-    {% if event == "WOMEN" %}
-        <h2>{{event}}</h2>
-        {% continue %}
-    {% endif %}
-    {% if event == "MIXED" %}
-        <h2>{{event}}</h2>
-        {% continue %}
-    {% endif %}
-    <h4>{{event}}</h4>
+    <a class = "btn btn-default" href = "/sports/event/{{event}}">{{event}}</a>
     </td>
     </tr>
 {% endfor %}
-
 
 </table>
 </body>
